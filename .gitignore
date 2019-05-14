@@ -32,3 +32,6 @@
 # Ignore dockerfiles
 Dockerfile
 docker-compose.yml
+
+#Ignore coverage
+/coverage/*

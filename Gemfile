@@ -53,6 +53,8 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
+# Use bootstrap framework for css
+gem 'bootstrap', '~> 4.3.1'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
@@ -73,7 +75,7 @@ group :development, :test do
   gem 'capybara', '2.18.0'             # to avoid deprecation warnings
   gem 'cucumber', '2.99.0'             # to avoid bug in cucumber 3
   gem 'launchy'                        # a useful debugging aid for user stories
-  gem 'selenium-webdriver'
+  gem 'webdrivers', '~> 3.0'
   gem 'chromedriver-helper'            # to run system tests with chrome
   gem 'factory_bot_rails'
 
