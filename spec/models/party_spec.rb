@@ -5,7 +5,7 @@ describe Party do
         context 'when a party has no candidates' do
             it 'should return an empty list' do
                 party = FactoryBot.build(:party)
-                expect(party.all_candidates).to eq party.candidates
+                expect(party.all_candidates).to be_empty
             end
         end
 
