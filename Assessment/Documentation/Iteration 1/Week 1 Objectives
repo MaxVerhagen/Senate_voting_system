@@ -1,0 +1,35 @@
+Group 1 Objectives:-
+
+Memebers Tasks:
+    Dan:
+        Work on Admin view for parties
+    
+    Max:
+        Work on Admin view for parties
+    
+    Parthey:
+        Controller
+        
+    Others:
+        Work on creating database for parties and candidates
+
+
+
+File iterations:
+    /app/Views
+        (Inspired by RottenPotatoes)
+        When you go to /admin
+            List of all the parties
+                Can click on each party to view more information about party
+                Add candidates to party
+                    View information about candidates
+                Reorganize party candicates
+            Option to add party
+        
+        
+    
+        
+    /db/     
+        Mock parties and party members 
+            party order prefernce 
+            

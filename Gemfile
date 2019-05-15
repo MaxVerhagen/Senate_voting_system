@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.0'
+ruby '2.5.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.0'
@@ -76,7 +76,6 @@ group :development, :test do
   gem 'cucumber', '2.99.0'             # to avoid bug in cucumber 3
   gem 'launchy'                        # a useful debugging aid for user stories
   gem 'webdrivers', '~> 3.0'
-  gem 'chromedriver-helper'            # to run system tests with chrome
   gem 'factory_bot_rails'
 
   # Unit testing framework
