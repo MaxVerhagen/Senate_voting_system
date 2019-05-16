@@ -1,5 +1,23 @@
 %p#notice= notice
 
+%h2= @party.name
+
+%table#candidates
+  %thead
+    %tr
+      %th Name
+      %th Surname
+      %th Divison
+      %th State
+      %th Positon
+  %tbody
+    - @party.candidates.each do |candidate|
+      %tr
+        %td{name: 'candidate-name'}= candidate.given_name  
+        %td{name: 'candidate-surname'}= candidate.surname
+        %td= candidate.divison_name
+        %td= candidate.state
+        %td= candidate.party_pos
 
 = link_to 'Edit', edit_party_path(@party)
 \|

@@ -1,4 +1,4 @@
-Then /^I should see these candidates:$/ do |candidates_table|
+Then /^I should see a list of these candidates:$/ do |candidates_table|
     expected_names = candidates_table.hashes.collect { |candidate| candidate['given_name'] }
     expected_surnames = candidates_table.hashes.collect { |candidate| candidate['surname'] }
     within('table[id=candidates]') do

@@ -17,7 +17,7 @@ Feature: Display political party detail
     
     Scenario: View a list of all candidates in party
         When I goto the show page of "The Greens" party
-        Then I should see these candidates:
+        Then I should see a list of these candidates:
         | given_name | surname |
         | Sophie     | Guy     |
         | Mark       | Keough  |
