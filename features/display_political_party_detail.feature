@@ -15,7 +15,7 @@ Feature: Display political party detail
         | Jane       | Bange   | Boothby      | SA    | 3         | 1        |
         | Patrick    | Donlad  | Hindmarsh    | SA    | 4         | 1        |
     
-    Scenario: View a list of all candidates in party
+    Scenario: View a list of all candidates in a party with candidates
         When I goto the show page of "The Greens" party
         Then I should see a list of these candidates:
         | given_name | surname |
@@ -23,3 +23,7 @@ Feature: Display political party detail
         | Mark       | Keough  |
         | Jane       | Bange   |
         | Patrick    | Donlad  |
+    
+    Scenario: View no candidates list in a party with no candidates
+        When I goto the show page of "Liberal Democrats" party
+        Then I should see no candidates

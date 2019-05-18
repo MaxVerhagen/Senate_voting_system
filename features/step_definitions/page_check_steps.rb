@@ -8,3 +8,10 @@ Then /^I should see a list of these candidates:$/ do |candidates_table|
         expect(collected_surnames).to eq(expected_surnames)
     end
 end
+
+Then /^I should see no candidates$/ do
+    within('table[id=candidates]') do
+        collected_names = all('td[name=candidate-name]').collect(&:text)
+        expect(collected_names).to be_empty
+    end
+end

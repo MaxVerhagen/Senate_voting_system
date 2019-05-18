@@ -11,6 +11,7 @@ class PartiesController < ApplicationController
   # GET /parties/1.json
   def show
     @party = Party.find params[:id]
+    @candidates = @party.all_candidates_in_order
   end
 
   # GET /parties/new
