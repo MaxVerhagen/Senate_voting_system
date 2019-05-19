@@ -1,5 +1,7 @@
 class PartiesController < ApplicationController
   before_action :set_party, only: [:show, :edit, :update, :destroy]
+  
+
 
   # GET /parties
   # GET /parties.json
@@ -42,15 +44,15 @@ class PartiesController < ApplicationController
   # PATCH/PUT /parties/1
   # PATCH/PUT /parties/1.json
   def update
-    respond_to do |format|
-      if @party.update(party_params)
-        format.html { redirect_to @party, notice: 'Party was successfully updated.' }
-        format.json { render :show, status: :ok, location: @party }
-      else
-        format.html { render :edit }
-        format.json { render json: @party.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @party.update(party_params)
+          format.html { redirect_to @party, notice: 'Party was successfully updated.' }
+          format.json { render :show, status: :ok, location: @party }
+        else
+          format.html { render :edit }
+          format.json { render json: @party.errors, status: :unprocessable_entity }
+        end
       end
-    end
   end
 
   # DELETE /parties/1
@@ -70,7 +72,7 @@ class PartiesController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def party_params
-      params.fetch(:party, {})
-    end
+  def party_params
+    params.require(:party).permit(:name, :name_ab, :created_at, :updated_at)
+  end
 end

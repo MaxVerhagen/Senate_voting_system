@@ -3,4 +3,7 @@
 
 = link_to 'Edit', edit_candidate_path(@candidate)
 \|
+
+= button_to 'Delete', candidates_path(@candidate) :method => delete, :confirm => 'Are you sure?'
+
 = link_to 'Back', candidates_path

@@ -1,7 +1,43 @@
-%h1 Editing party
+%h1 Editing #{@party.name}
 
-= render 'form'
+= form_tag party_path(@party), method: :put do
+  //= label :party, :name, 'Name'
+  = text_field :party, 'name'
+  = submit_tag 'Update Name'
 
-= link_to 'Show', @party
-\|
-= link_to 'Back', parties_path
+%br
+
+= form_tag party_path(@party), method: :put do
+  //= label :party, :name, 'Name'
+  = text_field :party, 'name_ab'
+  = submit_tag 'Update abv'  
+  
+  
+%br
+
+%h2 Edit Members
+%table#party
+  %thead
+    %tr
+      %th Given Name
+      %th Surname
+      %th Positon
+      %th Edit
+      %th Remove
+  %tbody
+    - @party.candidates.each do |candidate|
+      %tr
+        %td= candidate.given_name
+        %td= candidate.surname
+        %td= candidate.party_pos
+        %td= link_to 'Edit', edit_party_candidate_path(candidate)
+        %td= link_to 'Destroy', party_candidate_path(candidate), method: :delete, data: { confirm: 'Are you sure?' }
+
+
+%br
+= link_to 'Add Candidate', new_party_candidate_path(@party)
+%br
+= link_to "#{@party.name} index", party_path
+%br
+= link_to 'Return to Parties list', parties_path
+%br

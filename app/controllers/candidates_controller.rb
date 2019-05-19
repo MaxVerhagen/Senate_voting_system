@@ -1,5 +1,7 @@
 class CandidatesController < ApplicationController
   before_action :set_candidate, only: [:show, :edit, :update, :destroy]
+  
+
 
   # GET /candidates
   # GET /candidates.json
@@ -54,11 +56,16 @@ class CandidatesController < ApplicationController
   # DELETE /candidates/1
   # DELETE /candidates/1.json
   def destroy
+    id = params[:id]
+    @candidate = Candidate.find(id)
+    @party = @candidate.party_id
+    @party = Party.re_order
     @candidate.destroy
     respond_to do |format|
-      format.html { redirect_to candidates_url, notice: 'Candidate was successfully destroyed.' }
+      format.html { redirect_to candidates_url, notice: "'#{@candidate.given_name}' '#{@candidate.surname}' was successfully destroyed." }
       format.json { head :no_content }
     end
+    redirect_to candidates_path
   end
 
   private
@@ -68,7 +75,7 @@ class CandidatesController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def candidate_params
-      params.fetch(:candidate, {})
-    end
+  def candidate_params
+    params.require(:candidate).permit(:given_name , :surname , :divison_name , :state, :party_pos , :party_id)
+  end
 end

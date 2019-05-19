@@ -1,7 +1,15 @@
-%h1 Editing candidate
+%h1 Editing #{@party.name}
 
-= render 'form'
+= form_tag candidates_path(@candidate), method: :put do
+  = label :candidate, :given_name, 'Given Name'
+  = text_field :candidate, 'given_name'
+  
+  = label :candidate, :surname, 'Surname'
+  = text_field :candidate, 'surname'
+  
+  = submit_tag 'Update abv'  
 
-= link_to 'Show', @candidate
-\|
-= link_to 'Back', candidates_path
+
+
+
+= link_to 'Return to Candidates list', candidates_path
