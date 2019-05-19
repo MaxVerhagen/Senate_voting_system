@@ -1,9 +1,6 @@
 class PartiesController < ApplicationController
   before_action :set_party, only: [:show, :edit, :update, :destroy]
   
-  def party_params
-    params.require(:party).permit(:name, :name_ab)
-  end
   
   # GET /parties
   # GET /parties.json
@@ -78,5 +75,6 @@ class PartiesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def party_params
       params.fetch(:party, {})
+      params.require(:party).permit(:name, :name_ab)
     end
 end
