@@ -3,13 +3,15 @@
 %table
   %thead
     %tr
-      %th
-      %th
-      %th
+      %th Party Name
+      %th View Party
+      %th Edit Party
+      %th Delete Party
 
   %tbody
     - @parties.each do |party|
       %tr
+        %td= party.name
         %td= link_to 'Show', party
         %td= link_to 'Edit', edit_party_path(party)
         %td= link_to 'Destroy', party, method: :delete, data: { confirm: 'Are you sure?' }

@@ -1,11 +1,17 @@
 class PartiesController < ApplicationController
   before_action :set_party, only: [:show, :edit, :update, :destroy]
-
+  
+  def party_params
+    params.require(:party).permit(:name, :name_ab)
+  end
+  
   # GET /parties
   # GET /parties.json
   def index
     @parties = Party.all
   end
+  
+  
 
   # GET /parties/1
   # GET /parties/1.json
