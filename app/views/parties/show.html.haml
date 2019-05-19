@@ -1,6 +1,26 @@
 %p#notice= notice
 
+%h2.display-4= @party.name
+%br
 
-= link_to 'Edit', edit_party_path(@party)
-\|
-= link_to 'Back', parties_path
+%table{:class => 'table table-hover', :id => 'candidates'}
+  %thead.thead-dark
+    %tr
+      %th{:scope => 'col'} Name
+      %th{:scope => 'col'} Surname
+      %th{:scope => 'col'} Divison
+      %th{:scope => 'col'} State
+      %th{:scope => 'col'} Positon
+  %tbody
+    - @candidates.each do |candidate|
+      %tr
+        %td{name: 'candidate-name'}= candidate.given_name  
+        %td{name: 'candidate-surname'}= candidate.surname
+        %td= candidate.divison_name
+        %td= candidate.state
+        %td= candidate.party_pos
+
+= link_to 'Edit Info', edit_party_path(@party), :class => 'btn btn-primary'
+= link_to 'Add Candidate', new_party_candidate_path(@party), :class => 'btn btn-success'
+= link_to 'Remove Candidate', edit_party_path(@party), :class => 'btn btn-danger'
+= link_to 'Back', parties_path, :class => 'btn btn-secondary'

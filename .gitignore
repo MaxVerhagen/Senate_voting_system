@@ -35,3 +35,7 @@ docker-compose.yml
 
 #Ignore coverage
 /coverage/*
+
+#Ignore vs-code workspace
+vs-project-workspace.code-workspace
+.vscode/*
