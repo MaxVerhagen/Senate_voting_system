@@ -30,7 +30,7 @@
         %td= candidate.given_name
         %td= candidate.surname
         %td= candidate.party_pos
-        %td= link_to 'Edit', edit_party_candidate_path(candidate)
+        %td= link_to 'Edit', edit_party_candidate_path(@party, candidate)
         %td= link_to 'Destroy', party_candidate_path(candidate), method: :delete, data: { confirm: 'Are you sure?' }
 
 

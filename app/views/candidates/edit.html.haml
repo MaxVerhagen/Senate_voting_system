@@ -7,9 +7,13 @@
   = label :candidate, :surname, 'Surname'
   = text_field :candidate, 'surname'
   
+  = label :candidate, :divison_name, 'Divison'
+  = text_field :candidate, 'divison name'
+  
+  = label :candidate, :state, 'State'
+  = select :candidate, :state, ['SA','VIC','NT','WA','TAS', 'QLD', 'CAN']
+  
   = submit_tag 'Update abv'  
-
-
 
 
 = link_to 'Return to Candidates list', candidates_path
