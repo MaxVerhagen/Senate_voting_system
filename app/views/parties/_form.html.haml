@@ -10,5 +10,10 @@
           
     
   .actions
+    = f.label :name, 'Name of party:', :required => true
     = f.text_field :name
+    %br
+    = f.label :name_ab, 'Name abbrieviation:'
+    = f.text_field :name_ab
+    %br
     = f.submit 'Save'
