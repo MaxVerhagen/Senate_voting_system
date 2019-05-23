@@ -14,7 +14,10 @@ class VotesController < ApplicationController
 
   # GET /votes/new
   def new
-    @vote = Vote.new
+    @state = params[:state]
+
+    @parties = Party.order(:order).where(:state => @state)
+    @candidates = Candidate.order(:order).where(:state => @state)
   end
 
   # GET /votes/1/edit
@@ -24,17 +27,27 @@ class VotesController < ApplicationController
   # POST /votes
   # POST /votes.json
   def create
-    @vote = Vote.new(vote_params)
+    partypref = params[:party] || session[:party]
+    candidatepref = params[:candidate] || session[:candidate]
 
-    respond_to do |format|
-      if @vote.save
-        format.html { redirect_to @vote, notice: 'Vote was successfully created.' }
-        format.json { render :show, status: :created, location: @vote }
-      else
-        format.html { render :new }
-        format.json { render json: @vote.errors, status: :unprocessable_entity }
-      end
+    pref = ''
+
+    partypref.each do |ppref|
+      pref = pref + ppref[1].to_s + ","
     end
+
+    candidatepref.each do |cpref|
+      pref = pref + cpref[1].to_s + ","
+    end
+
+
+    pref = pref.first(-1)
+
+
+    @vote = Vote.create!(:state => @state, :preference => pref)
+    flash[:notice] = "Vote was successfully saved."
+
+    redirect_to votes_path
   end
 
   # PATCH/PUT /votes/1
