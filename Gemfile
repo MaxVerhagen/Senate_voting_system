@@ -55,8 +55,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Use bootstrap framework for css
 gem 'bootstrap', '~> 4.3.1'
-# Use jquery as the JavaScript library
-gem 'jquery-rails'
 
 #################################
 ####### APP SPECIFIC GEMS #######
@@ -102,6 +100,13 @@ end
 
 # Html templating markup language
 gem 'haml-rails'
+
+# Use jquery as the JavaScript library
+gem 'jquery-rails'
+
+# Enables use of sortable lists using jquery ui
+gem 'jquery-ui-rails'
+gem 'rails_sortable'
 
 # Allows for safe use of and and
 gem 'andand'
