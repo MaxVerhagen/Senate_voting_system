@@ -1,43 +1,46 @@
-%h1 Editing #{@party.name}
+%p#notice= notice
 
-= form_tag party_path(@party), method: :put do
+%h1.display-4 Editing #{@party.name}
+%br
+
+= form_tag party_path(@party), :class=> 'row', method: :put do
   //= label :party, :name, 'Name'
-  = text_field :party, 'name'
-  = submit_tag 'Update Name'
+  = text_field :party, 'name',:class=>"form-control col-3 ml-4 mr-3 "
+  = submit_tag 'Update Name', :class => 'btn btn-danger col-2' , data: { confirm: 'Are you sure?' }
+  
 
 %br
 
-= form_tag party_path(@party), method: :put do
+= form_tag party_path(@party), :class=> 'row', method: :put do
   //= label :party, :name, 'Name'
-  = text_field :party, 'name_ab'
-  = submit_tag 'Update abv'  
+  = text_field :party, 'name_ab',:class=>"form-control col-3 ml-4 mr-3 "
+  /= text_field  class="form-control col-3 ml-4 mr-3 ", placeholder= "#{@party.name_ab}"
+  = submit_tag 'Update abv' ,:class => 'btn btn-warning col-2', data: { confirm: 'Are you sure?' }
   
   
 %br
-
-%h2 Edit Members
-%table#party
-  %thead
+%h2.display-5 Update Members
+%table#party{:class => 'table table-hover', :id => 'candidates'}
+  %thead.thead-dark
     %tr
-      %th Given Name
-      %th Surname
-      %th Positon
-      %th Edit
-      %th Remove
+      %th{:scope => 'col'} Given Name
+      %th{:scope => 'col'} Surname
+      %th{:scope => 'col'} Positon
+      %th{:scope => 'col'} Info
+      %th{:scope => 'col'} Edit
+      %th{:scope => 'col'} Remove
   %tbody
     - @party.candidates.each do |candidate|
       %tr
         %td= candidate.given_name
         %td= candidate.surname
         %td= candidate.party_pos
-        %td= link_to 'Edit', edit_party_candidate_path(@party, candidate)
-        %td= link_to 'Destroy', party_candidate_path(candidate), method: :delete, data: { confirm: 'Are you sure?' }
+        %td= link_to 'Info', party_candidate_path(@party, candidate), :class => 'btn btn-link'
+        %td= link_to 'Edit', edit_party_candidate_path(@party, candidate), :class => 'btn btn-link'
+        %td= link_to 'Destroy', party_candidate_path(@party, candidate), :class => 'btn btn-link', method: :delete, data: { confirm: 'Are you sure?' }
 
 
 %br
-= link_to 'Add Candidate', new_party_candidate_path(@party)
-%br
-= link_to "#{@party.name} index", party_path
-%br
-= link_to 'Return to Parties list', parties_path
-%br
+= link_to 'Add Candidate', new_party_candidate_path(@party), :class => 'btn btn-success'
+= link_to "Go to #{@party.name} index", party_path, :class => 'btn btn-secondary'
+= link_to 'Go to Parties list', parties_path, :class => 'btn btn-dark'

@@ -1,19 +1,48 @@
-%h1 Editing #{@party.name}
+%p#notice= notice
 
-= form_tag candidates_path(@candidate), method: :put do
+%h1.display-4 Editing #{@candidate.given_name} #{@candidate.surname}
+%br
+<div class="card">
+<div class="card-header">Update Info</div>
+<div class="card-body">
+= form_tag party_candidate_path(@candidate.party_id, @candidate), method: :put do
+  <div class="form-row">
+  <div class="form-group col-md-5 ml-4">
   = label :candidate, :given_name, 'Given Name'
-  = text_field :candidate, 'given_name'
-  
+  = text_field :candidate, 'given_name',:class=>"form-control "
+  </div>
+  <div class="form-group col-md-5 ml-4">
   = label :candidate, :surname, 'Surname'
-  = text_field :candidate, 'surname'
-  
+  = text_field :candidate, 'surname',:class=>"form-control"
+  </div>
+  </div>
+  <div class="form-row">
+  <div class="form-group col-md-5 ml-4">
   = label :candidate, :divison_name, 'Divison'
-  = text_field :candidate, 'divison name'
-  
+  = text_field :candidate, 'divison_name', :class=>"form-control"
+  </div>
+  <div class="form-group col-md-3 ml-4">
   = label :candidate, :state, 'State'
-  = select :candidate, :state, ['SA','VIC','NT','WA','TAS', 'QLD', 'CAN']
-  
-  = submit_tag 'Update abv'  
-
-
-= link_to 'Return to Candidates list', candidates_path
+  /=select :candidate, :state,  ['SA','VIC','NT','WA','TAS', 'QLD', 'CAN']
+  <select id="candidate.state" class="form-control" >
+  <option selected disabled>#{@candidate.state}</option>
+  <option>SA</option>
+  <option>VIC</option>
+  <option>NT</option>
+  <option>WA</option>
+  <option>TAS</option>
+  <option>QLD</option>
+  <option>CAN</option>
+  </select>
+  </div>
+  </div>
+  = submit_tag 'Update',:class => 'btn btn-warning col-md-3 ml-4 ', data: { confirm: 'Are you sure?' }
+</div>
+</div>
+%br
+%br
+%br
+= link_to "Go to #{@candidate.given_name}'s info", party_candidate_path(@candidate.party_id, @candidate), :class => 'btn btn-primary ml-4'
+= link_to "Go to Party info", party_path(@candidate.party_id), :class => 'btn btn-info'
+= link_to 'Go to Parties list', parties_path, :class => 'btn btn-secondary'
+= link_to 'Go to Candidates list', party_candidates_path, :class => 'btn btn-dark'
