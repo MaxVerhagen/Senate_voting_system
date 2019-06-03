@@ -14,6 +14,7 @@ class CandidatesController < ApplicationController
 
   # GET /candidates/new
   def new
+    @party = Party.find params[:party_id]
     @candidate = Candidate.new
   end
 
@@ -24,7 +25,8 @@ class CandidatesController < ApplicationController
   # POST /candidates
   # POST /candidates.json
   def create
-    @candidate = Candidate.new(candidate_params)
+    @party = Party.find params[:party_id]
+    @candidate = @party.candidates.new(candidate_params)
 
     respond_to do |format|
       if @candidate.save
@@ -70,5 +72,6 @@ class CandidatesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def candidate_params
       params.fetch(:candidate, {})
+      params.require(:candidate).permit(:given_name, :surname, :divison_name, :state, :party_pos)
     end
 end
