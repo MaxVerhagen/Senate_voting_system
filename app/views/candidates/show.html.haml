@@ -1,9 +1,8 @@
 %p#notice= notice
 
 
-= link_to 'Edit', edit_candidate_path(@candidate)
-\|
+/= link_to 'Edit', edit_candidate_path(@candidate)
 
-= button_to 'Delete', candidates_path(@candidate) :method => delete, :confirm => 'Are you sure?'
+/= button_to 'Delete', candidates_path(@candidate) :method => delete, :confirm => 'Are you sure?'
 
-= link_to 'Back', candidates_path
+/= link_to 'Back', candidates_path
