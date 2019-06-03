@@ -46,3 +46,4 @@
 = link_to "Go to Party info", party_path(@candidate.party_id), :class => 'btn btn-info'
 = link_to 'Go to Parties list', parties_path, :class => 'btn btn-secondary'
 = link_to 'Go to Candidates list', party_candidates_path, :class => 'btn btn-dark'
+= link_to 'Destroy', party_candidate_path(@candidate.party_id, @candidate), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'

@@ -44,7 +44,7 @@ class CandidatesController < ApplicationController
   def update
     respond_to do |format|
       if @candidate.update(candidate_params)
-        format.html { redirect_to @candidate, notice: 'Candidate was successfully updated.' }
+        format.html { redirect_to party_candidate_path(@candidate.party_id, @candidate), notice: 'Candidate was successfully updated.' }
         format.json { render :show, status: :ok, location: @candidate }
       else
         format.html { render :edit }
@@ -58,8 +58,8 @@ class CandidatesController < ApplicationController
   def destroy
     id = params[:id]
     @candidate = Candidate.find(id)
-    @party = @candidate.party_id
-    @party = Party.re_order
+    @party = Party.find(Candidate.find(id).party_id)
+    @party = @party.re_order
     @candidate.destroy
     respond_to do |format|
       format.html { redirect_to candidates_url, notice: "'#{@candidate.given_name}' '#{@candidate.surname}' was successfully destroyed." }

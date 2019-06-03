@@ -5,10 +5,10 @@ class Party < ApplicationRecord
         self.candidates.order(:party_pos)
     end
     
-    def self.re_order
+    def re_order
         temp = self.candidates.order(:party_pos)
         for x in self.candidates do
-            temp.find(x).party_pos = x 
+            x.party_pos = x 
         end
     end
     

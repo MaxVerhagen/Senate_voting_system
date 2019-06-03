@@ -6,7 +6,7 @@
 = form_tag party_path(@party), :class=> 'row', method: :put do
   //= label :party, :name, 'Name'
   = text_field :party, 'name',:class=>"form-control col-3 ml-4 mr-3 "
-  = submit_tag 'Update Name', :class => 'btn btn-danger col-2' , data: { confirm: 'Are you sure?' }
+  = submit_tag 'Update Name', :class => 'btn btn-warning col-2' , data: { confirm: 'Are you sure?' }
   
 
 %br
@@ -37,10 +37,11 @@
         %td= candidate.party_pos
         %td= link_to 'Info', party_candidate_path(@party, candidate), :class => 'btn btn-link'
         %td= link_to 'Edit', edit_party_candidate_path(@party, candidate), :class => 'btn btn-link'
-        %td= link_to 'Destroy', party_candidate_path(@party, candidate), :class => 'btn btn-link', method: :delete, data: { confirm: 'Are you sure?' }
+        %td= link_to 'Destroy', party_candidate_path(@party, candidate.party_id), :class => 'btn btn-link', method: :delete, data: { confirm: 'Are you sure?' }
 
 
 %br
 = link_to 'Add Candidate', new_party_candidate_path(@party), :class => 'btn btn-success'
 = link_to "Go to #{@party.name} index", party_path, :class => 'btn btn-secondary'
 = link_to 'Go to Parties list', parties_path, :class => 'btn btn-dark'
+= link_to 'Destroy', party_path(@party), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'
