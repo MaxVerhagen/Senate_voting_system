@@ -28,16 +28,16 @@ parties = [{:name => 'Australian Democrats', :name_ab => 'DEM'},
 
 Party.all.each do |party|
     if party.name == 'The Greens'
-        Candidate.create!({:given_name => 'Sophie', :surname => 'Guy', :divison_name => 'Adelaide', :state => 'SA', :party_pos => 1, :party_id => party.id})
-        Candidate.create!({:given_name => 'Mark', :surname => 'Keough', :divison_name => 'Barker', :state => 'SA', :party_pos => 2, :party_id => party.id})
-        Candidate.create!({:given_name => 'Jane', :surname => 'Bange', :divison_name => 'Boothby', :state => 'SA', :party_pos => 3, :party_id => party.id})
-        Candidate.create!({:given_name => 'Patrick', :surname => 'O\'Sullivan', :divison_name => 'Hindmarsh', :state => 'SA', :party_pos => 4, :party_id => party.id})
+        Candidate.create!({:given_name => 'Sophie', :surname => 'Guy', :divison_name => 'Adelaide', :state => 'SA', :party_pos => 0, :party_id => party.id})
+        Candidate.create!({:given_name => 'Mark', :surname => 'Keough', :divison_name => 'Barker', :state => 'SA', :party_pos => 1, :party_id => party.id})
+        Candidate.create!({:given_name => 'Jane', :surname => 'Bange', :divison_name => 'Boothby', :state => 'SA', :party_pos => 2, :party_id => party.id})
+        Candidate.create!({:given_name => 'Patrick', :surname => 'O\'Sullivan', :divison_name => 'Hindmarsh', :state => 'SA', :party_pos => 3, :party_id => party.id})
     elsif party.name == 'Family First Party'
-        Candidate.create!({:given_name => 'Adrian', :surname => 'Rivish', :divison_name => 'Adelaide', :state => 'SA', :party_pos => 1, :party_id => party.id})
-        Candidate.create!({:given_name => 'Yvonne', :surname => 'Zeppel', :divison_name => 'Barker', :state => 'SA', :party_pos => 2, :party_id => party.id})
-        Candidate.create!({:given_name => 'Wheatcroft', :surname => 'Gary', :divison_name => 'Boothby', :state => 'SA', :party_pos => 3, :party_id => party.id})
+        Candidate.create!({:given_name => 'Adrian', :surname => 'Rivish', :divison_name => 'Adelaide', :state => 'SA', :party_pos => 0, :party_id => party.id})
+        Candidate.create!({:given_name => 'Yvonne', :surname => 'Zeppel', :divison_name => 'Barker', :state => 'SA', :party_pos => 1, :party_id => party.id})
+        Candidate.create!({:given_name => 'Wheatcroft', :surname => 'Gary', :divison_name => 'Boothby', :state => 'SA', :party_pos => 2, :party_id => party.id})
     elsif party.name == 'Liberal Democrats'
-        Candidate.create!({:given_name => 'Tyrone', :surname => 'Lock', :divison_name => 'Adelaide', :state => 'SA', :party_pos => 1, :party_id => party.id})
-        Candidate.create!({:given_name => 'Luke', :surname => 'Dzivinski', :divison_name => 'Mayo', :state => 'SA', :party_pos => 2, :party_id => party.id})
+        Candidate.create!({:given_name => 'Tyrone', :surname => 'Lock', :divison_name => 'Adelaide', :state => 'SA', :party_pos => 0, :party_id => party.id})
+        Candidate.create!({:given_name => 'Luke', :surname => 'Dzivinski', :divison_name => 'Mayo', :state => 'SA', :party_pos => 1, :party_id => party.id})
     end
 end

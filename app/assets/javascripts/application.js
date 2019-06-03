@@ -11,7 +11,6 @@
 // about supported directives.
 //
 //= require jquery3
-//= require jquery-ujs
 //= require jquery-ui/widgets/sortable
 //= require rails_sortable
 //= require popper
