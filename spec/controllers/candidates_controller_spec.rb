@@ -79,33 +79,42 @@ RSpec.describe CandidatesController, type: :controller do
 
       it "should increase party candidate count" do
         expect {
-          post :create, params: {:party_id => party.id, candidate: candidate_attributes}
+          post :create, params: {party_id: party.id, candidate: candidate_attributes}
         }.to change(party.candidates, :count).by(1)
       end
 
       it "should add the candidate to the party" do
-        post :create, params: {:party_id => party.id, candidate: candidate_attributes}
+        post :create, params: {party_id: party.id, candidate: candidate_attributes}
         expect(party.candidates.pluck(:given_name)).to include candidate_attributes[:given_name]
         expect(party.candidates.pluck(:surname)).to include candidate_attributes[:surname]
       end
 
       it "should redirect to the party show page" do
-        post :create, params: {:party_id => party.id, candidate: candidate_attributes}
+        post :create, params: {party_id: party.id, candidate: candidate_attributes}
         expect(response).to redirect_to party
       end
 
       it "should have a successful creation notice message" do
-        post :create, params: {:party_id => party.id, candidate: candidate_attributes}
-        expect(flash[:notice]).to eq("Candidate was successfully updated.")
+        post :create, params: {party_id: party.id, candidate: candidate_attributes}
+        expect(flash[:notice]).to eq("Candidate was successfully created.")
       end
     end
 
-    # context "with invalid params" do
-    #   it "returns a success response (i.e. to display the 'new' template)" do
-    #     post :create, params: {candidate: invalid_attributes}, session: valid_session
-    #     expect(response).to be_successful
-    #   end
-    # end
+    context "adding a new candidate with invalid parameters" do
+      let(:party) { FactoryBot.create(:party) }
+      let(:invalid_candidate_attributes) { FactoryBot.attributes_for(:invalid_candidate, :party => party) }
+
+      it "should not increase party candidate count" do
+        expect {
+          post :create, params: {party_id: party.id, candidate: invalid_candidate_attributes}
+        }.not_to change(party.candidates, :count).from(0)
+      end
+
+      it "should render 'new' template" do
+        post :create, params: {party_id: party.id, candidate: invalid_candidate_attributes}
+        expect(response).to render_template :new
+      end
+    end
   end
 
   # describe "PUT #update" do
