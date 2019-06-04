@@ -47,10 +47,8 @@ class PartiesController < ApplicationController
       respond_to do |format|
         if @party.update(party_params)
           format.html { redirect_to @party, notice: 'Party was successfully updated.' }
-          format.json { render :show, status: :ok, location: @party }
         else
-          format.html { render :edit }
-          format.json { render json: @party.errors, status: :unprocessable_entity }
+          format.html { redirect_to edit_party_path(@party), flash: { error: @party.errors.full_messages.join(', ') } }
         end
       end
   end

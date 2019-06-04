@@ -1,7 +1,22 @@
-%p#notice= notice
+-if flash.key?(:notice)
+  %div{class: "alert alert-success", role: "alert"}
+    = notice
+    %button{class: "close", "data-dismiss" => "alert", "aria-label" => "Close"}
+      %span{"aria-hidden" => "true"}
+        &times;
 
 %h1.display-4 Editing #{@party.name}
 %br
+
+-if flash.key?(:error)
+  %div{class: "alert alert-danger", role: "alert"}
+    %b= "Party information was not updated:"
+    %button{class: "close", "data-dismiss" => "alert", "aria-label" => "Close"}
+      %span{"aria-hidden" => "true"}
+        &times;
+    %ul
+      -flash[:error].split(', ').each do |message|
+        %li= message
 
 = form_tag party_path(@party), :class=> 'row', method: :put do
   //= label :party, :name, 'Name'
@@ -25,8 +40,8 @@
     %tr
       %th{:scope => 'col'} Given Name
       %th{:scope => 'col'} Surname
+      %th{:scope => 'col'} Divison
       %th{:scope => 'col'} Positon
-      %th{:scope => 'col'} Info
       %th{:scope => 'col'} Edit
       %th{:scope => 'col'} Remove
   %tbody
@@ -34,10 +49,10 @@
       %tr
         %td= candidate.given_name
         %td= candidate.surname
+        %td= candidate.divison_name
         %td= candidate.party_pos
-        %td= link_to 'Info', party_candidate_path(@party, candidate), :class => 'btn btn-link'
         %td= link_to 'Edit', edit_party_candidate_path(@party, candidate), :class => 'btn btn-link'
-        %td= link_to 'Destroy', party_candidate_path(@party, candidate.party_id), :class => 'btn btn-link', method: :delete, data: { confirm: 'Are you sure?' }
+        %td= link_to 'Destroy', party_candidate_path(@party, candidate), :class => 'btn btn-link', method: :delete, data: { confirm: 'Are you sure?' }
 
 
 %br
