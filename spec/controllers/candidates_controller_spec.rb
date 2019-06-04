@@ -25,117 +25,146 @@ require 'rails_helper'
 
 RSpec.describe CandidatesController, type: :controller do
 
-  # This should return the minimal set of attributes required to create a valid
-  # Candidate. As you add validations to Candidate, be sure to
-  # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
+  # # This should return the minimal set of attributes required to create a valid
+  # # Candidate. As you add validations to Candidate, be sure to
+  # # adjust the attributes here as well.
+  # let(:valid_attributes) {
+  #   skip("Add a hash of attributes valid for your model")
+  # }
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
+  # let(:invalid_attributes) {
+  #   skip("Add a hash of attributes invalid for your model")
+  # }
 
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # CandidatesController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
+  # # This should return the minimal set of values that should be in the session
+  # # in order to pass any filters (e.g. authentication) defined in
+  # # CandidatesController. Be sure to keep this updated too.
+  # let(:valid_session) { {} }
 
-  describe "GET #index" do
-    it "returns a success response" do
-      Candidate.create! valid_attributes
-      get :index, params: {}, session: valid_session
-      expect(response).to be_successful
-    end
-  end
+  # describe "GET #index" do
+  #   it "returns a success response" do
+  #     Candidate.create! valid_attributes
+  #     get :index, params: {}, session: valid_session
+  #     expect(response).to be_successful
+  #   end
+  # end
 
-  describe "GET #show" do
-    it "returns a success response" do
-      candidate = Candidate.create! valid_attributes
-      get :show, params: {id: candidate.to_param}, session: valid_session
-      expect(response).to be_successful
-    end
-  end
+  # describe "GET #show" do
+  #   it "returns a success response" do
+  #     candidate = Candidate.create! valid_attributes
+  #     get :show, params: {id: candidate.to_param}, session: valid_session
+  #     expect(response).to be_successful
+  #   end
+  # end
 
-  describe "GET #new" do
-    it "returns a success response" do
-      get :new, params: {}, session: valid_session
-      expect(response).to be_successful
-    end
-  end
+  # describe "GET #new" do
+  #   it "returns a success response" do
+  #     get :new, params: {}, session: valid_session
+  #     expect(response).to be_successful
+  #   end
+  # end
 
-  describe "GET #edit" do
-    it "returns a success response" do
-      candidate = Candidate.create! valid_attributes
-      get :edit, params: {id: candidate.to_param}, session: valid_session
-      expect(response).to be_successful
-    end
-  end
+  # describe "GET #edit" do
+  #   it "returns a success response" do
+  #     candidate = Candidate.create! valid_attributes
+  #     get :edit, params: {id: candidate.to_param}, session: valid_session
+  #     expect(response).to be_successful
+  #   end
+  # end
 
   describe "POST #create" do
-    context "with valid params" do
-      it "creates a new Candidate" do
+    context "adding a new candidate with valid parameters" do
+      let(:party) { FactoryBot.create(:party) }
+      let(:candidate_attributes) { FactoryBot.attributes_for(:candidate, :party => party) }
+
+      it "should increase party candidate count" do
         expect {
-          post :create, params: {candidate: valid_attributes}, session: valid_session
-        }.to change(Candidate, :count).by(1)
+          post :create, params: {party_id: party.id, candidate: candidate_attributes}
+        }.to change(party.candidates, :count).by(1)
       end
 
-      it "redirects to the created candidate" do
-        post :create, params: {candidate: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(Candidate.last)
-      end
-    end
-
-    context "with invalid params" do
-      it "returns a success response (i.e. to display the 'new' template)" do
-        post :create, params: {candidate: invalid_attributes}, session: valid_session
-        expect(response).to be_successful
-      end
-    end
-  end
-
-  describe "PUT #update" do
-    context "with valid params" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
-
-      it "updates the requested candidate" do
-        candidate = Candidate.create! valid_attributes
-        put :update, params: {id: candidate.to_param, candidate: new_attributes}, session: valid_session
-        candidate.reload
-        skip("Add assertions for updated state")
+      it "should add the candidate to the party" do
+        post :create, params: {party_id: party.id, candidate: candidate_attributes}
+        expect(party.candidates.pluck(:given_name)).to include candidate_attributes[:given_name]
+        expect(party.candidates.pluck(:surname)).to include candidate_attributes[:surname]
       end
 
-      it "redirects to the candidate" do
-        candidate = Candidate.create! valid_attributes
-        put :update, params: {id: candidate.to_param, candidate: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(candidate)
+      it "should add the candidate at last position" do
+        post :create, params: {party_id: party.id, candidate: candidate_attributes}
+        new_party_candidate = Candidate.where(given_name: candidate_attributes[:given_name], surname: candidate_attributes[:surname])
+        expect(new_party_candidate.first.party_pos).to be 0
+      end
+
+      it "should redirect to the party show page" do
+        post :create, params: {party_id: party.id, candidate: candidate_attributes}
+        expect(response).to redirect_to party
+      end
+
+      it "should have a successful creation notice message" do
+        post :create, params: {party_id: party.id, candidate: candidate_attributes}
+        expect(flash[:notice]).to eq("Candidate was successfully created.")
       end
     end
 
-    context "with invalid params" do
-      it "returns a success response (i.e. to display the 'edit' template)" do
-        candidate = Candidate.create! valid_attributes
-        put :update, params: {id: candidate.to_param, candidate: invalid_attributes}, session: valid_session
-        expect(response).to be_successful
+    context "adding a new candidate with invalid parameters" do
+      let(:party) { FactoryBot.create(:party) }
+      let(:invalid_candidate_attributes) { FactoryBot.attributes_for(:invalid_candidate, :party => party) }
+
+      it "should not increase party candidate count" do
+        expect {
+          post :create, params: {party_id: party.id, candidate: invalid_candidate_attributes}
+        }.not_to change(party.candidates, :count).from(0)
+      end
+
+      it "should redirect to candidate new page" do
+        post :create, params: {party_id: party.id, candidate: invalid_candidate_attributes}
+        expect(response).to redirect_to new_party_candidate_path(party)
       end
     end
   end
 
-  describe "DELETE #destroy" do
-    it "destroys the requested candidate" do
-      candidate = Candidate.create! valid_attributes
-      expect {
-        delete :destroy, params: {id: candidate.to_param}, session: valid_session
-      }.to change(Candidate, :count).by(-1)
-    end
+  # describe "PUT #update" do
+  #   context "with valid params" do
+  #     let(:new_attributes) {
+  #       skip("Add a hash of attributes valid for your model")
+  #     }
 
-    it "redirects to the candidates list" do
-      candidate = Candidate.create! valid_attributes
-      delete :destroy, params: {id: candidate.to_param}, session: valid_session
-      expect(response).to redirect_to(candidates_url)
-    end
-  end
+  #     it "updates the requested candidate" do
+  #       candidate = Candidate.create! valid_attributes
+  #       put :update, params: {id: candidate.to_param, candidate: new_attributes}, session: valid_session
+  #       candidate.reload
+  #       skip("Add assertions for updated state")
+  #     end
+
+  #     it "redirects to the candidate" do
+  #       candidate = Candidate.create! valid_attributes
+  #       put :update, params: {id: candidate.to_param, candidate: valid_attributes}, session: valid_session
+  #       expect(response).to redirect_to(candidate)
+  #     end
+  #   end
+
+  #   context "with invalid params" do
+  #     it "returns a success response (i.e. to display the 'edit' template)" do
+  #       candidate = Candidate.create! valid_attributes
+  #       put :update, params: {id: candidate.to_param, candidate: invalid_attributes}, session: valid_session
+  #       expect(response).to be_successful
+  #     end
+  #   end
+  # end
+
+  # describe "DELETE #destroy" do
+  #   it "destroys the requested candidate" do
+  #     candidate = Candidate.create! valid_attributes
+  #     expect {
+  #       delete :destroy, params: {id: candidate.to_param}, session: valid_session
+  #     }.to change(Candidate, :count).by(-1)
+  #   end
+
+  #   it "redirects to the candidates list" do
+  #     candidate = Candidate.create! valid_attributes
+  #     delete :destroy, params: {id: candidate.to_param}, session: valid_session
+  #     expect(response).to redirect_to(candidates_url)
+  #   end
+  # end
 
 end

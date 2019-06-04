@@ -12,3 +12,11 @@ When /^I goto the (.+) page of "([^"]*)" "([^"]*)" candidate$/ do |page_type, ca
         visit party_candidate_path(Party.find(candidate.party_id), candidate)
     end
 end
+
+Then /^I will be on the (.+) page of "([^"]*)"(?: party)?$/ do |page_type, party_name|
+    party = Party.find_by(name: party_name)
+
+    if page_type == "new candidate"
+        expect(current_path).to eq new_party_candidate_path(party)
+    end
+end

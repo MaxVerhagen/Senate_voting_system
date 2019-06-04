@@ -14,6 +14,7 @@ class CandidatesController < ApplicationController
 
   # GET /candidates/new
   def new
+    @party = Party.find params[:party_id]
     @candidate = Candidate.new
   end
 
@@ -24,15 +25,15 @@ class CandidatesController < ApplicationController
   # POST /candidates
   # POST /candidates.json
   def create
-    @candidate = Candidate.new(candidate_params)
+    party = Party.find params[:party_id]
+    candidate_pos = party.candidates.count
+    candidate = party.candidates.new(candidate_params.merge(party_pos: candidate_pos))
 
     respond_to do |format|
-      if @candidate.save
-        format.html { redirect_to @candidate, notice: 'Candidate was successfully created.' }
-        format.json { render :show, status: :created, location: @candidate }
+      if candidate.save
+        format.html { redirect_to party, notice: 'Candidate was successfully created.' }
       else
-        format.html { render :new }
-        format.json { render json: @candidate.errors, status: :unprocessable_entity }
+        format.html { redirect_to new_party_candidate_path(party), flash: { error: candidate.errors.full_messages.join(', ') } }
       end
     end
   end
@@ -42,7 +43,7 @@ class CandidatesController < ApplicationController
   def update
     respond_to do |format|
       if @candidate.update(candidate_params)
-        format.html { redirect_to @candidate, notice: 'Candidate was successfully updated.' }
+        format.html { redirect_to @candidate, notice: 'Candidate was successfully updated.'}
         format.json { render :show, status: :ok, location: @candidate }
       else
         format.html { render :edit }
@@ -70,5 +71,6 @@ class CandidatesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def candidate_params
       params.fetch(:candidate, {})
+      params.require(:candidate).permit(:given_name, :surname, :divison_name, :state, :party_pos)
     end
 end
