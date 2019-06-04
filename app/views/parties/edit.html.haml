@@ -45,7 +45,7 @@
       %th{:scope => 'col'} Edit
       %th{:scope => 'col'} Remove
   %tbody
-    - @party.candidates.each do |candidate|
+    - @candidates.each do |candidate|
       %tr
         %td= candidate.given_name
         %td= candidate.surname
