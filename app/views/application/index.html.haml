@@ -1,38 +1,69 @@
 %div{class:"btn-group float-right ml-5 mr-5", role:"group"}
   %button{class:"btn btn-secondary dropdown-toggle", "data-toggle"=>"dropdown", "aria-haspopup"=>"true", "aria-expanded"=>"false"}Admin
   %div{class:"dropdown-menu"}
-    = link_to 'Party index',  parties_path, :class => 'dropdown-item'
-    = link_to 'View Votes', parties_path, :class => 'dropdown-item'
+    %button{class:"dropdown-item", "aria-label" => "login", "data-toggle"=>"modal", "data-target"=>"#login"}Control Panel
+    /= link_to 'Control Panel',  parties_path, :class => 'dropdown-item'
+    = link_to 'View Votes', "/vote", :class => 'dropdown-item'
+    = link_to 'Test Vote', "/vote", :class => 'dropdown-item'
 
 %div{class: "text-center"}
   %img{src:"https://www.neilpharaoh.com.au/wp-content/uploads/2018/02/AEC-logo-1024x579.jpg", class:"img-fluid", alt:"Responsive image"}
   %br
-  %button{class:"btn btn-primary btn-lg col-3", "aria-label" => "How voting works", "data-toggle"=>"modal", "data-target"=>"#exampleModal"}How voting works
+  %button{class:"btn btn-primary btn-lg col-3", "aria-label" => "How voting works", "data-toggle"=>"modal", "data-target"=>"#votingworks"}How voting works
   %br
   %br
-  = link_to 'How to vote', parties_path, :class => 'btn btn-success btn-lg col-3'
+  %button{class:"btn btn-info btn-lg col-3", "aria-label" => "How to vote", "data-toggle"=>"modal", "data-target"=>"#how2vote"}How to vote
   %br
   %br
-  = link_to 'Vote now', parties_path, :class => 'btn btn-success btn-lg col-3'
+  = link_to 'Vote now',  "/vote", :class => 'btn btn-success btn-lg col-3'
 
 
 
+%div{class:"modal fade bd-example-modal-lg", "id"=>"votingworks", "tabindex"=>"-1", "role"=>"dialog", "aria-labelledby"=>"vwlabel", "aria-hidden"=>"true"}
+  %div{class:"modal-dialog modal-lg", role:"document"}
+    %div{class:"modal-content"}
+      %div{class:"modal-header"}
+        %h5{class:"modal-title", id:"vwlabel"}How voting works
+        %button{type:"button", class:"close", "data-dismiss"=>"modal", "aria-label"=>"Close"}
+        %span{"aria-hidden"=>"true"}
+          &times;
+      %div{class:"modal-body"}
+        %div{class:"embed-responsive embed-responsive-16by9"}
+          %iframe{width:"900", height:"506", src:"https://www.youtube.com/embed/bw15fhq_gDQ", frameborder:"0", allow:"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"}
 
-//WILL TRANSLE LATER
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog" role="document">
-<div class="modal-content">
-<div class="modal-header">
-<h5 class="modal-title" id="exampleModalLabel">How voting works</h5>
-<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-<span aria-hidden="true">&times;</span>
-</button>
-</div>
-<div class="modal-body">
-<div class="embed-responsive embed-responsive-16by9">
-<iframe width="900" height="506" src="https://www.youtube.com/embed/bw15fhq_gDQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
-</div>
-</div>
-</div>
-</div>
+%div{class:"modal fade", "id"=>"how2vote", "tabindex"=>"-1", "role"=>"dialog", "aria-labelledby"=>"h2vlabel", "aria-hidden"=>"true"}
+  %div{class:"modal-dialog", role:"document"}
+    %div{class:"modal-content"}
+      %div{class:"modal-header"}
+        %h5{class:"modal-title", id:"h2vlabel"}How to vote
+        %button{type:"button", class:"close", "data-dismiss"=>"modal", "aria-label"=>"Close"}
+        %span{"aria-hidden"=>"true"}
+          &times;
+      %div{class:"modal-body"}
+        %h2.display-5 step 1
+        %h2.display-5 step 2
+        %h2.display-5 step 3
+      %div{class:"modal-footer"}
+        = link_to 'Vote now', "/vote", :class => 'btn btn-primary'
+        = link_to 'More info', parties_path, :class => 'btn btn-secondary'
+        %button{class:"btn btn-dark", "data-dismiss"=>"modal"}Close
+        
+
+%div{class:"modal fade", "id"=>"login", "tabindex"=>"-1", "role"=>"dialog", "aria-labelledby"=>"loginlabel", "aria-hidden"=>"true"}
+  %div{class:"modal-dialog", role:"document"}
+    %div{class:"modal-content"}
+      %div{class:"modal-header"}
+        %h5{class:"modal-title", id:"loginlabel"}Admin Login
+        %button{type:"button", class:"close", "data-dismiss"=>"modal", "aria-label"=>"Close"}
+        %span{"aria-hidden"=>"true"}
+          &times;
+      %div{class:"modal-body"}
+        //=form_tag
+        %label Username
+        %input{class:"form-control"}
+        %br
+        %label Password
+        %input{class:"form-control"}
+        %br
+        = link_to 'Login', parties_path, :class => 'btn btn-primary'
+        %button{class:"btn btn-dark", "data-dismiss"=>"modal"}Cancel
