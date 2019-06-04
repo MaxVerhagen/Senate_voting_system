@@ -83,9 +83,20 @@ RSpec.describe CandidatesController, type: :controller do
         }.to change(party.candidates, :count).by(1)
       end
 
-      it "redirects to the created candidate" do
-        post :create, params: {candidate: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(Candidate.last)
+      it "should add the candidate to the party" do
+        post :create, params: {:party_id => party.id, candidate: candidate_attributes}
+        expect(party.candidates.pluck(:given_name)).to include candidate_attributes[:given_name]
+        expect(party.candidates.pluck(:surname)).to include candidate_attributes[:surname]
+      end
+
+      it "should redirect to the party show page" do
+        post :create, params: {:party_id => party.id, candidate: candidate_attributes}
+        expect(response).to redirect_to party
+      end
+
+      it "should have a successful creation notice message" do
+        post :create, params: {:party_id => party.id, candidate: candidate_attributes}
+        expect(flash[:notice]).to eq("Candidate was successfully updated.")
       end
     end
 
