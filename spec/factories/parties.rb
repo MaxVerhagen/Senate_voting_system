@@ -9,7 +9,7 @@ FactoryBot.define do
     factory :party_with_candidates, parent: :party do
         #Create five candidates and associate them with this party
         after(:create) do |party|
-            create_list(:candidates, 5, party: party)
+            create_list(:candidate, 5, party: party)
         end
     end
 end

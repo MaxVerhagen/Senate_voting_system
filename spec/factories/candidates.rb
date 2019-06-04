@@ -8,7 +8,7 @@ FactoryBot.define do
         c.sequence(:given_name) { |n| "Bob #{n}"}
         c.sequence(:surname) { |n| "Smith #{n}"}
         c.sequence(:divison_name) { |n| "Divison #{n}"}
-        c.sequence(:party_pos) { |n| "#{n}"}
+        c.sequence(:party_pos) { |n| "#{n - 1}"}
 
         #Have the candidate state be a random item from a list
         c.state { %w(NSW NT QLD SA TAS VIC WA ACT).sample }
@@ -20,7 +20,7 @@ FactoryBot.define do
 
         #Create unique given name, last name and division for each candidate
         c.sequence(:given_name) { |n| "Bob #{n}"}
-        c.sequence(:party_pos) { |n| "#{n}"}
+        c.sequence(:party_pos) { |n| "#{n - 1}"}
 
         #Have the candidate state be a random item from a list
         c.state { %w(NSW NT QLD SA TAS VIC WA ACT).sample }
