@@ -30,3 +30,36 @@ Feature: Add candidate to political party
         | Jane       | Bange   | 3         |
         | Patrick    | Donlad  | 4         |
         | Bob        | Smith   | 5         |
+
+    Scenario: Add a candidate with no first name to political party
+        When I goto the show page of "The Greens" party
+        And I follow "Add Candidate"
+        And I fill in the following:
+        | candidate[surname]      | Smith    |
+        | candidate[divison_name] | Adelaide |
+        And I select "SA" from "candidate[state]"
+        And I press "Add"
+        Then I will be on the new candidate page of "The Greens" party
+        And I should see "Given name can't be blank"
+    
+    Scenario: Add a candidate with no last name to political party
+        When I goto the show page of "The Greens" party
+        And I follow "Add Candidate"
+        And I fill in the following:
+        | candidate[given_name]   | Bob      |
+        | candidate[divison_name] | Adelaide |
+        And I select "SA" from "candidate[state]"
+        And I press "Add"
+        Then I will be on the new candidate page of "The Greens" party
+        And I should see "Surname can't be blank"
+
+    Scenario: Add a candidate with no division name to political party
+        When I goto the show page of "The Greens" party
+        And I follow "Add Candidate"
+        And I fill in the following:
+        | candidate[given_name]   | Bob      |
+        | candidate[surname]      | Smith    |
+        And I select "SA" from "candidate[state]"
+        And I press "Add"
+        Then I will be on the new candidate page of "The Greens" party
+        And I should see "Divison name can't be blank"
