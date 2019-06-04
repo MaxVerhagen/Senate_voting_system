@@ -1,3 +1,11 @@
+-if flash.key?(:notice)
+  %div{class: "alert alert-success", role: "alert"}
+    = notice
+    %button{class: "close", "data-dismiss" => "alert", "aria-label" => "Close"}
+      %span{"aria-hidden" => "true"}
+        &times;
+
+
 %h1 Listing parties
 
 %table
@@ -10,6 +18,7 @@
   %tbody
     - @parties.each do |party|
       %tr
+        %td= party.name
         %td= link_to 'Show', party
         %td= link_to 'Edit', edit_party_path(party)
         %td= link_to 'Destroy', party, method: :delete, data: { confirm: 'Are you sure?' }

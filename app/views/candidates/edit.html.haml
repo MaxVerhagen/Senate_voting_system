@@ -1,7 +1,24 @@
-%h1 Editing candidate
+%h1.display-4 Editing #{@candidate.given_name} #{@candidate.surname}
+%br
 
-= render 'form'
+- if flash.key?(:error)
+	%div{class: "alert alert-danger alert-dismissible fade show", role: "alert"}
+		%b= "Candidate information was not updated:"
+		%button{class: "close", "data-dismiss" => "alert", "aria-label" => "Close"}
+			%span{"aria-hidden" => "true"}
+				&times;
+		%ul
+			- flash[:error].split(', ').each do |message|
+				%li= message
+%div.card
+	%div.card-header
+		Update Info
+	%div.card-body
+		= render 'edit_form'
 
-= link_to 'Show', @candidate
-\|
-= link_to 'Back', candidates_path
+%br
+%br
+
+= link_to "Go to Party info", party_path(@candidate.party_id), :class => 'btn btn-primary ml-4'
+= link_to 'Go to Parties list', parties_path, :class => 'btn btn-secondary'
+= link_to 'Destroy', party_candidate_path(@candidate.party_id, @candidate), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'
