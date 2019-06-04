@@ -89,6 +89,12 @@ RSpec.describe CandidatesController, type: :controller do
         expect(party.candidates.pluck(:surname)).to include candidate_attributes[:surname]
       end
 
+      it "should add the candidate at last position" do
+        post :create, params: {party_id: party.id, candidate: candidate_attributes}
+        new_party_candidate = Candidate.where(given_name: candidate_attributes[:given_name], surname: candidate_attributes[:surname])
+        expect(new_party_candidate.first.party_pos).to be 0
+      end
+
       it "should redirect to the party show page" do
         post :create, params: {party_id: party.id, candidate: candidate_attributes}
         expect(response).to redirect_to party
@@ -110,9 +116,9 @@ RSpec.describe CandidatesController, type: :controller do
         }.not_to change(party.candidates, :count).from(0)
       end
 
-      it "should render 'new' template" do
+      it "should redirect to candidate new page" do
         post :create, params: {party_id: party.id, candidate: invalid_candidate_attributes}
-        expect(response).to render_template :new
+        expect(response).to redirect_to new_party_candidate_path(party)
       end
     end
   end
