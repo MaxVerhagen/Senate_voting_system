@@ -1,0 +1,22 @@
+= form_for @candidate, :url => { :action => :create }  do |f|
+  %div.form-row
+    %div{class: "form-group col-md-5 ml-4"}
+      = f.label :first_name
+      = f.text_field :given_name, class: "form-control"
+    %div{class: "form-group col-md-5 ml-4"}
+      = f.label :last_name
+      = f.text_field :surname, class: "form-control"
+  
+  %div.form-row
+    %div{class: "form-group col-md-5 ml-4"}
+      = f.label :divison_name
+      = f.text_field :divison_name, class: "form-control"
+    %div{class: "form-group col-md-2 ml-4"}
+      = f.label :state
+      = f.select :state, %w(NSW NT QLD SA TAS VIC WA ACT), {}, class: "form-control"
+
+  %div{class: "actions w-50 p-3 form-row"}
+    %div.col-md-3
+      = f.submit 'Add', class: "btn btn-success btn-block"
+    %div.col-md-3
+      = link_to 'Back', @party, :class => "btn btn-danger btn-block"

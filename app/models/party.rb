@@ -3,7 +3,7 @@ class Party < ApplicationRecord
     validates :name, :name_ab, presence: true
 
     def all_candidates_in_order
-        self.candidates.order(:party_pos)
+        self.candidates.order(:party_pos).all
     end
     
     def re_order_party_pos

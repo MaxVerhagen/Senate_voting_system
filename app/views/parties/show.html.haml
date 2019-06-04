@@ -16,14 +16,14 @@
       %th{:scope => 'col'} Divison
       %th{:scope => 'col'} State
       %th{:scope => 'col'} Positon
-  %tbody
+  %tbody.sortable
     - @candidates.each do |candidate|
-      %tr
+      %tr{:id => candidate.sortable_id}
         %td{name: 'candidate-name'}= candidate.given_name  
         %td{name: 'candidate-surname'}= candidate.surname
-        %td= candidate.divison_name
-        %td= candidate.state
-        %td= candidate.party_pos
+        %td{name: 'candidate-div'}= candidate.divison_name
+        %td{name: 'candidate-state'}= candidate.state
+        %td{name: 'candidate-sort-pos'}= candidate.party_pos + 1
 
 = link_to 'Edit Info', edit_party_path(@party), :class => 'btn btn-primary'
 = link_to 'Add Candidate', new_party_candidate_path(@party), :class => 'btn btn-success'
