@@ -1,3 +1,18 @@
-%h1 New candidate
+%h1.display-4 Add new candidate
+%br
 
-= render 'form'
+- if flash.key?(:error)
+	%div{class: "alert alert-danger alert-dismissible fade show", role: "alert"}
+		%b= "Candidate information was not updated:"
+		%button{class: "close", "data-dismiss" => "alert", "aria-label" => "Close"}
+			%span{"aria-hidden" => "true"}
+				&times;
+		%ul
+			- flash[:error].split(', ').each do |message|
+				%li= message
+
+%div.card
+	%div.card-header
+		New Candidate Info
+	%div.card-body
+		= render 'new_form'

@@ -1,24 +1,17 @@
 = form_for @candidate, :url => { :action => :create }  do |f|
-  - if flash.key?(:error)
-    %div{class: "alert alert-danger", role: "alert"}
-      %b= "Candidate creation was unsuccessful:"
-      %ul
-        - flash[:error].split(', ').each do |message|
-          %li= message
-
-  %div{class: "w-75 p-3 form-row"}
-    %div.col
+  %div.form-row
+    %div{class: "form-group col-md-5 ml-4"}
       = f.label :first_name
       = f.text_field :given_name, class: "form-control"
-    %div.col
+    %div{class: "form-group col-md-5 ml-4"}
       = f.label :last_name
       = f.text_field :surname, class: "form-control"
   
-  %div{class: "w-50 p-3 form-row"}
-    %div.col
+  %div.form-row
+    %div{class: "form-group col-md-5 ml-4"}
       = f.label :divison_name
       = f.text_field :divison_name, class: "form-control"
-    %div.col
+    %div{class: "form-group col-md-2 ml-4"}
       = f.label :state
       = f.select :state, %w(NSW NT QLD SA TAS VIC WA ACT), {}, class: "form-control"
 

@@ -25,15 +25,15 @@ class CandidatesController < ApplicationController
   # POST /candidates
   # POST /candidates.json
   def create
-    @party = Party.find params[:party_id]
-    candidate_pos = @party.candidates.count
-    @candidate = @party.candidates.new(candidate_params.merge(party_pos: candidate_pos))
+    party = Party.find params[:party_id]
+    candidate_pos = party.candidates.count
+    candidate = party.candidates.new(candidate_params.merge(party_pos: candidate_pos))
 
     respond_to do |format|
-      if @candidate.save
-        format.html { redirect_to @party, notice: 'Candidate was successfully created.' }
+      if candidate.save
+        format.html { redirect_to party, notice: 'Candidate was successfully created.' }
       else
-        format.html { redirect_to new_party_candidate_path(@party), flash: { error: @candidate.errors.full_messages.join(', ') } }
+        format.html { redirect_to new_party_candidate_path(party), flash: { error: candidate.errors.full_messages.join(', ') } }
       end
     end
   end
