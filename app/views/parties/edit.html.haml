@@ -1,7 +1,7 @@
-%h1 Editing party
+%h2.display-4 Editing party
 
 = render 'form'
 
-= link_to 'Show', @party
-\|
-= link_to 'Back', parties_path
+= link_to 'Show', @party, :class => 'btn btn-info'
+
+= link_to 'Back', parties_path, :class => 'btn btn-secondary'
