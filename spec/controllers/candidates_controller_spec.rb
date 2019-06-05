@@ -131,7 +131,7 @@ RSpec.describe CandidatesController, type: :controller do
       let!(:party) { FactoryBot.create(:party) }
       let(:candidate_attributes) { FactoryBot.attributes_for(:candidate, :party => party) }
 
-      it "should update candidate information" do
+      it "should update candidate information to new information" do
         candidate = FactoryBot.create(:candidate, :party => party)
         put :update, params: {party_id: party, id: candidate, candidate: candidate_attributes}
         expect(Candidate.find(1).attributes).to include(candidate_attributes.stringify_keys)
@@ -156,9 +156,9 @@ RSpec.describe CandidatesController, type: :controller do
 
       it "should not update candidate information" do
         candidate = FactoryBot.create(:candidate, :party => party)
-        original_candidate_attributes = candidate.attributes
+        original_candidate_attributes = Candidate.where(id: 1).pluck(:given_name, :surname, :division_name, :party_pos)
         put :update, params: {party_id: party, id: candidate, candidate: invalid_candidate_attributes}
-        expect(candidate.attributes).to eq(original_candidate_attributes)
+        expect(Candidate.where(id: 1).pluck(:given_name, :surname, :division_name, :party_pos)).to eq(original_candidate_attributes)
       end
 
       it "should redirect to candidate edit page" do
@@ -167,33 +167,19 @@ RSpec.describe CandidatesController, type: :controller do
         expect(response).to redirect_to edit_party_candidate_path(party)
       end
     end
-    
-    # context "with valid params" do
-    #   let(:new_attributes) {
-    #     skip("Add a hash of attributes valid for your model")
-    #   }
+  end
 
-    #   it "updates the requested candidate" do
-    #     candidate = Candidate.create! valid_attributes
-    #     put :update, params: {id: candidate.to_param, candidate: new_attributes}, session: valid_session
-    #     candidate.reload
-    #     skip("Add assertions for updated state")
-    #   end
+  descirbe "DELETE #destroy" do
+    context "deleting a candidate from a party" do
+      let!(:party) { FactoryBot.create(:party) }
 
-    #   it "redirects to the candidate" do
-    #     candidate = Candidate.create! valid_attributes
-    #     put :update, params: {id: candidate.to_param, candidate: valid_attributes}, session: valid_session
-    #     expect(response).to redirect_to(candidate)
-    #   end
-    # end
-
-    # context "with invalid params" do
-    #   it "returns a success response (i.e. to display the 'edit' template)" do
-    #     candidate = Candidate.create! valid_attributes
-    #     put :update, params: {id: candidate.to_param, candidate: invalid_attributes}, session: valid_session
-    #     expect(response).to be_successful
-    #   end
-    # end
+      it "should decrease candidate count by one" do
+        candidate = FactoryBot.create(:candidate, party: party)
+        expect {
+          DELETE :destroy, params: {party_id: party.id, candidate: candidate_attributes}
+        }.to change(party.candidates, :count).by(1)
+      end
+    end
   end
 
   # describe "DELETE #destroy" do
