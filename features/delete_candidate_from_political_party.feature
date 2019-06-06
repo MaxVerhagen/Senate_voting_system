@@ -28,6 +28,16 @@ Feature: Delete candidate from political party
         And I should see "Mark Keough was successfully removed."
     
     @javascript
+    Scenario: Delete a candidate from a political party from it's edit page
+        When I goto the show page of "The Greens" party
+        And I follow "Edit Info"
+        And Choosing candidate "Mark" "Keough" I follow "Edit" link
+        And I follow "Delete Candidate"
+        And I confirm popup
+        Then I will be on the edit page of "The Greens" party
+        And I should see "Mark Keough was successfully removed."
+    
+    @javascript
     Scenario: Choosing not to delete a candidate after clicking delete link
         When I goto the show page of "The Greens" party
         And I follow "Edit Info"

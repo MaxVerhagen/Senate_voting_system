@@ -1,5 +1,6 @@
 #Go to any specific page for a given party
 When /^I goto the (.+) page of "([^"]*)"(?: party)?$/ do |page_type, party_name|
+    puts Party.find_by_name(party_name).id
     if page_type == "show"
         visit party_path(Party.find_by_name(party_name).id)
     end
@@ -16,6 +17,8 @@ end
 When /^Choosing candidate "([^"]*)" "([^"]*)" I follow "([^"]*)" link$/ do |candidate_given_name, candidate_surname, page_type|
     if page_type == "Delete"
         find("[name=#{candidate_given_name}_#{candidate_surname}_Delete]").click
+    elsif page_type == "Edit"
+        find("[name=#{candidate_given_name}_#{candidate_surname}_Edit]").click
     end
 end
 
@@ -24,5 +27,11 @@ Then /^I will be on the (.+) page of "([^"]*)"(?: party)?$/ do |page_type, party
 
     if page_type == "new candidate"
         expect(current_path).to eq new_party_candidate_path(party)
+    elsif page_type == "edit"
+        expect(current_path).to eq edit_party_path(party)
     end
+end
+
+Then /^I will be on admin home page$/ do
+    expect(current_path).to eq parties_path
 end

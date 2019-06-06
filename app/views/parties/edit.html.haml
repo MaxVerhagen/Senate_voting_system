@@ -52,11 +52,11 @@
         %td{name: 'candidate-div'}= candidate.divison_name
         %td{name: 'candidate-sort-pos'}= candidate.party_pos + 1
         %td= link_to 'Edit', edit_party_candidate_path(@party, candidate), name: "#{candidate.given_name}_#{candidate.surname}_Edit", class: 'btn btn-link'
-        %td= link_to 'Destroy', party_candidate_path(@party, candidate), name: "#{candidate.given_name}_#{candidate.surname}_Delete", class: 'btn btn-link', method: :delete, data: { confirm: 'Are you sure?' }
+        %td= link_to 'Delete', party_candidate_path(@party, candidate), name: "#{candidate.given_name}_#{candidate.surname}_Delete", class: 'btn btn-link', method: :delete, data: { confirm: 'Are you sure?' }
 
 
 %br
 = link_to 'Add Candidate', new_party_candidate_path(@party), :class => 'btn btn-success'
 = link_to "Go to #{@party.name} index", party_path, :class => 'btn btn-secondary'
 = link_to 'Go to Parties list', parties_path, :class => 'btn btn-dark'
-= link_to 'Destroy', party_path(@party), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'
+= link_to 'Delete Party', party_path(@party), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'
