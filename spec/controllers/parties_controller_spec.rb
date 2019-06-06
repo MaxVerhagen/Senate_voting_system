@@ -42,4 +42,27 @@ describe PartiesController, type: :controller do
       end
     end
   end
+
+  describe "DELETE #destroy" do
+    context "sucessfully deleting a party" do
+      it "should decreases party count by one" do
+        party = FactoryBot.create(:party)
+        expect {
+          delete :destroy, params: {id: party}
+        }.to change(Party, :count).by(-1)
+      end
+
+      it "should pass a notice of successful deletion" do
+        party = FactoryBot.create(:party)
+        delete :destroy, params: {id: party}
+        expect(flash[:notice]).to eq("Party was successfully destroyed.")
+      end
+
+      it "should redirect to parties list page" do
+        party = FactoryBot.create(:party)
+        delete :destroy, params: {id: party}
+        expect(response).to redirect_to parties_url        
+      end
+    end
+  end
 end

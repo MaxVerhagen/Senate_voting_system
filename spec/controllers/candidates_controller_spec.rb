@@ -169,15 +169,33 @@ RSpec.describe CandidatesController, type: :controller do
     end
   end
 
-  descirbe "DELETE #destroy" do
+  describe "DELETE #destroy" do
     context "deleting a candidate from a party" do
       let!(:party) { FactoryBot.create(:party) }
 
       it "should decrease candidate count by one" do
         candidate = FactoryBot.create(:candidate, party: party)
         expect {
-          DELETE :destroy, params: {party_id: party.id, candidate: candidate_attributes}
-        }.to change(party.candidates, :count).by(1)
+          delete :destroy, params: {party_id: party, id: candidate}
+        }.to change(party.candidates, :count).by(-1)
+      end
+
+      it "should rearrange other candidate party position accordingly" do
+        FactoryBot.create_list(:candidate, 5, party: party)
+        delete :destroy, params: {party_id: party, id: party.candidates.find(3)}
+        expect(party.candidates.find(4).party_pos).to eq 2
+      end
+
+      it "should pass a notice of successful candidate deletion" do
+        candidate = FactoryBot.create(:candidate, party: party)
+        delete :destroy, params: {party_id: party, id: candidate}       
+        expect(flash[:notice]).to eq("#{candidate.given_name} #{candidate.surname} was successfully removed.")      
+      end
+
+      it "should redirect to party edit page" do
+        candidate = FactoryBot.create(:candidate, party: party)
+        delete :destroy, params: {party_id: party, id: candidate}       
+        expect(response).to redirect_to edit_party_path(party)
       end
     end
   end

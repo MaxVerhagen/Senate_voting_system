@@ -59,7 +59,6 @@ class PartiesController < ApplicationController
     @party.destroy
     respond_to do |format|
       format.html { redirect_to parties_url, notice: 'Party was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
