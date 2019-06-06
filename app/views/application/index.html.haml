@@ -15,7 +15,8 @@
   %button{class:"btn btn-info btn-lg col-3", "aria-label" => "How to vote", "data-toggle"=>"modal", "data-target"=>"#how2vote"}How to vote
   %br
   %br
-  = link_to 'Vote now',  "/vote", :class => 'btn btn-success btn-lg col-3'
+  %button{class:"btn btn-success btn-lg col-3", "aria-label" => "Vote now", "data-toggle"=>"modal", "data-target"=>"#state_vote"}Vote now
+  /= link_to 'Vote now',  new_vote_path(:state => 'SA'), :class => 'btn btn-success btn-lg col-3'
 
 
 
@@ -44,10 +45,31 @@
         %h2.display-5 step 2
         %h2.display-5 step 3
       %div{class:"modal-footer"}
-        = link_to 'Vote now', "/vote", :class => 'btn btn-primary'
+        %button{class:"btn btn-success", "aria-label" => "Vote now","data-dismiss"=>"modal", "data-toggle"=>"modal", "data-target"=>"#state_vote"}Vote now
         = link_to 'More info', parties_path, :class => 'btn btn-secondary'
         %button{class:"btn btn-dark", "data-dismiss"=>"modal"}Close
         
+%div{class:"modal fade", "id"=>"state_vote", "tabindex"=>"-1", "role"=>"dialog", "aria-labelledby"=>"h2vlabel", "aria-hidden"=>"true"}
+  %div{class:"modal-dialog", role:"document"}
+    %div{class:"modal-content"}
+      %div{class:"modal-header"}
+        %h5{class:"modal-title", id:"h2vlabel"}Select state
+        %button{type:"button", class:"close", "data-dismiss"=>"modal", "aria-label"=>"Close"}
+        %span{"aria-hidden"=>"true"}
+          &times;
+      %div{class:"modal-body text-center"}
+        = link_to 'SA', new_vote_path(:state => 'SA'), :class => 'btn btn-primary col-3'
+        = link_to 'NT', new_vote_path(:state => 'NT'), :class => 'btn btn-primary col-3'
+        = link_to 'NSW', new_vote_path(:state => 'NSW'), :class => 'btn btn-primary col-3'
+        = link_to 'VIC', new_vote_path(:state => 'VIC'), :class => 'btn btn-primary col-3'
+        = link_to 'WA', new_vote_path(:state => 'WA'), :class => 'btn btn-primary col-3'
+        = link_to 'TAS', new_vote_path(:state => 'TAS'), :class => 'btn btn-primary col-3'
+        = link_to 'ACT', new_vote_path(:state => 'ACT'), :class => 'btn btn-primary col-3'
+        = link_to 'QLD', new_vote_path(:state => 'QLD'), :class => 'btn btn-primary col-3'
+        = link_to 'NAT', new_vote_path(:state => 'NAT'), :class => 'btn btn-primary col-3'
+      %div{class:"modal-footer"}
+        %button{class:"btn btn-dark", "data-dismiss"=>"modal"}Close
+
 
 %div{class:"modal fade", "id"=>"login", "tabindex"=>"-1", "role"=>"dialog", "aria-labelledby"=>"loginlabel", "aria-hidden"=>"true"}
   %div{class:"modal-dialog", role:"document"}
@@ -67,3 +89,5 @@
         %br
         = link_to 'Login', parties_path, :class => 'btn btn-primary'
         %button{class:"btn btn-dark", "data-dismiss"=>"modal"}Cancel
+        
+        
