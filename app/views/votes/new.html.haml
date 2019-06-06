@@ -6,7 +6,9 @@
       %p{class:"mr-3"}How_2_vote
       %div{class:"media-body"}
       - @parties.each do |party|
+        
         %span{class:"border border-dark col-7"}
+          %br
           - if party.name
             .logo
               =image_tag asset_path('LOGO.png')
@@ -17,7 +19,7 @@
               %option{:value => number+1}= number+1        
           %br
           %br
-          %button{class:"btn btn-light font-weight-bold", "data-toggle"=>"tooltip", title:"#{party.name}", "data-placement"=>"top" }#{party.name_ab}
+          %button{class:"btn btn-light font-weight-bold", "data-toggle"=>"tooltip", title:"#{party.name}", "data-placement"=>"top", "disabled"=>"true"}#{party.name_ab}
           %br
           %br
     %p{class:"p-2 mb-0 text-white bg-dark row"} 
@@ -27,7 +29,7 @@
       - @parties.each do |party|
         %span{class:"border border-dark col-7 border-bottom-0 "}
           %br
-          %button{class:"btn btn-light font-weight-bold", "data-toggle"=>"tooltip", title:"#{party.name}", "data-placement"=>"top"}#{party.name_ab}
+          %button{class:"btn btn-light font-weight-bold", "data-toggle"=>"tooltip", title:"#{party.name}", "data-placement"=>"top", "disabled"=>"true"}#{party.name_ab}
           %br
           - @candidates.each do |candidate|
             - if candidate.party_id == party.id

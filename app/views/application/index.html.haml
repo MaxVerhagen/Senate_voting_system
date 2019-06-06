@@ -46,7 +46,7 @@
         %h2.display-5 step 3
       %div{class:"modal-footer"}
         %button{class:"btn btn-success", "aria-label" => "Vote now","data-dismiss"=>"modal", "data-toggle"=>"modal", "data-target"=>"#state_vote"}Vote now
-        = link_to 'More info', parties_path, :class => 'btn btn-secondary'
+        = link_to 'More info', "/vote", :class => 'btn btn-secondary'
         %button{class:"btn btn-dark", "data-dismiss"=>"modal"}Close
         
 %div{class:"modal fade", "id"=>"state_vote", "tabindex"=>"-1", "role"=>"dialog", "aria-labelledby"=>"h2vlabel", "aria-hidden"=>"true"}
