@@ -35,7 +35,7 @@
   
 %br
 %h2.display-5 Update Members
-%table#party{:class => 'table table-hover', :id => 'candidates'}
+%table{:class => 'table table-hover', :id => 'candidates'}
   %thead.thead-dark
     %tr
       %th{:scope => 'col'} Given Name
@@ -47,12 +47,12 @@
   %tbody
     - @candidates.each do |candidate|
       %tr
-        %td= candidate.given_name
-        %td= candidate.surname
-        %td= candidate.divison_name
-        %td= candidate.party_pos + 1
-        %td= link_to 'Edit', edit_party_candidate_path(@party, candidate), :class => 'btn btn-link'
-        %td= link_to 'Destroy', party_candidate_path(@party, candidate), :class => 'btn btn-link', method: :delete, data: { confirm: 'Are you sure?' }
+        %td{name: 'candidate-name'}= candidate.given_name
+        %td{name: 'candidate-surname'}= candidate.surname
+        %td{name: 'candidate-div'}= candidate.divison_name
+        %td{name: 'candidate-sort-pos'}= candidate.party_pos + 1
+        %td= link_to 'Edit', edit_party_candidate_path(@party, candidate), name: "#{candidate.given_name}_#{candidate.surname}_Edit", class: 'btn btn-link'
+        %td= link_to 'Destroy', party_candidate_path(@party, candidate), name: "#{candidate.given_name}_#{candidate.surname}_Delete", class: 'btn btn-link', method: :delete, data: { confirm: 'Are you sure?' }
 
 
 %br

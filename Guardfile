@@ -82,7 +82,7 @@ guard :rspec, cmd: "bundle exec rspec" do
 end
 
 cucumber_options = {
-  cmd_additional_args: '--format pretty'
+  cmd_additional_args: '--format pretty',
   # Below are examples overriding defaults
 
   # cmd: 'bin/cucumber',
@@ -106,3 +106,5 @@ guard "cucumber", cucumber_options do
     Dir[File.join("**/#{m[1]}.feature")][0] || "features"
   end
 end
+
+clearing :on

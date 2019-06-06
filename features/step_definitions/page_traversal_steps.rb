@@ -13,6 +13,12 @@ When /^I goto the (.+) page of "([^"]*)" "([^"]*)" candidate$/ do |page_type, ca
     end
 end
 
+When /^Choosing candidate "([^"]*)" "([^"]*)" I follow "([^"]*)" link$/ do |candidate_given_name, candidate_surname, page_type|
+    if page_type == "Delete"
+        find("[name=#{candidate_given_name}_#{candidate_surname}_Delete]").click
+    end
+end
+
 Then /^I will be on the (.+) page of "([^"]*)"(?: party)?$/ do |page_type, party_name|
     party = Party.find_by(name: party_name)
 
