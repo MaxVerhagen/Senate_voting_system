@@ -1,0 +1,131 @@
+// Place all the styles related to the Votes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+p {
+	margin: 5px;
+	padding:0px;
+}
+
+p.big{
+	font-size:20px;
+	font-weight:bold;
+}
+
+p.black{
+	background: #000000;
+	font-weight:bold;
+	font-size: 20px;
+	color: #ffffff;
+}
+
+
+p.partyname{
+	bottom:0;
+	font-size:25px;
+}
+
+p.bpartyname{
+	font-size:25px;
+	font-weight:bold;
+}
+
+p.desc{
+	margin:0px;
+	line-height:10px;
+	padding-left:5px;
+	padding-top:3px;
+}
+
+div#votediv{
+	height:720px;
+	width:2300px;
+	border: solid 1px #000000;
+}
+
+div#votetitlediv{
+	width:1300px;
+}
+
+div#abovediv{
+	margin-top: 10px;
+	height: 250px;
+	
+}
+
+div#break{
+	width:2300px;
+	height: 15px;
+	background: #000000;
+}
+
+div#belowdiv{
+
+	
+}
+
+div.instdiv{
+	float:left;
+	width:160px;
+}
+
+div.abovesepdiv{
+	position:relative;
+	height: 250px;
+	float:left;
+	width:140px;
+	border-left: solid 1px #000000;
+}
+
+div.belowsepdiv{
+	height: 350px;
+	float:left;
+	width:140px;
+	border-left: solid 1px #000000;
+}
+
+
+div.abovetag{
+	height:40;
+	position:absolute;
+	bottom:0;
+	margin-bottom:10px;
+	float:left;
+}
+
+div.belowtag{
+	width:140px;
+	height:40px;
+	float:left;
+	top:0;
+	margin-top:10px;
+}
+
+div.selects{
+	width:40px;
+	height:40px;
+	float:left;
+}
+div.describe{
+	width:100px;
+	height:40px;
+	float:left;
+	
+}
+
+div.logo{
+	position:absolute;
+	bottom: 100px;
+	left:40px;
+	
+}
+
+select{
+	width:40px;
+	height:40px;
+	left:40px;
+}
+
+select.above{
+	position:absolute;
+	bottom: 50px;
+}

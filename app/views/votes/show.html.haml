@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Preference:
+  = @vote.preference
+
+= link_to 'Edit', edit_vote_path(@vote)
+\|
+= link_to 'Back', votes_path

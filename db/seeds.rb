@@ -9,18 +9,18 @@
 Party.destroy_all
 Candidate.destroy_all
 
-parties = [{:name => 'Australian Democrats', :name_ab => 'DEM'},
-            {:name => 'Australian Labor Party', :name_ab => 'ALP'},
-            {:name => 'Australian Protectionist Party', :name_ab => 'APP'},
-            {:name => 'Family First Party', :name_ab => 'FFP'},
-            {:name => 'Liberal Party of Australia', :name_ab => 'LP'},
-            {:name => 'Marijuana (HEMP) Party/Australian Sex Party', :name_ab => 'SXHM'},
-            {:name => 'National Party of Australia', :name_ab => 'NP'},
-            {:name => 'Nick Xenophon Team', :name_ab => 'XEN'},
-            {:name => 'The Greens', :name_ab => 'GRN'},
-            {:name => 'Animal Justice Party', :name_ab => 'AJP'},
-            {:name => 'Liberal Democrats', :name_ab => 'LD'},
-            {:name => 'Indepedent', :name_ab => 'IDP'},
+parties = [{:name => 'Australian Democrats', :name_ab => 'DEM', :state => "SA"},
+            {:name => 'Australian Labor Party', :name_ab => 'ALP', :state => "SA"},
+            {:name => 'Australian Protectionist Party', :name_ab => 'APP', :state => "SA"},
+            {:name => 'Family First Party', :name_ab => 'FFP', :state => "SA"},
+            {:name => 'Liberal Party of Australia', :name_ab => 'LP', :state => "SA"},
+            {:name => 'Marijuana (HEMP) Party/Australian Sex Party', :name_ab => 'SXHM', :state => "SA"},
+            {:name => 'National Party of Australia', :name_ab => 'NP', :state => "SA"},
+            {:name => 'Nick Xenophon Team', :name_ab => 'XEN', :state => "SA"},
+            {:name => 'The Greens', :name_ab => 'GRN', :state => "SA"},
+            {:name => 'Animal Justice Party', :name_ab => 'AJP', :state => "SA"},
+            {:name => 'Liberal Democrats', :name_ab => 'LD', :state => "SA"},
+            {:name => 'Indepedent', :name_ab => 'IDP', :state => "SA"},
     ]
     .map do |attributes|
         Party.find_or_create_by! attributes

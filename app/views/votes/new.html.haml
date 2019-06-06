@@ -1,0 +1,92 @@
+%h1 Voting Page for #{@state}
+%hr
+
+- @parties.each do |party|
+  - if party.state == @state
+    - if party.name != 'Indepedent'
+      %p
+        = party.name_ab
+        ===
+        = party.name
+
+
+= form_tag votes_path(:state => @state) do
+
+  #votediv
+    #votetitlediv
+      %p
+        Senate Ballot Paper
+      %p
+        %strong
+          #{@state}
+        – Election of #{@parties.size - 1} Senators
+    #abovediv
+      .instdiv
+        %p{:class => "big"}
+          You may
+        %p{:class => "big"}
+          vote in one of
+        %p{:class => "big"}
+          two ways
+        %p{:class => "black"}
+          Either
+        %p{:class => "big"}
+          Above the line
+        %p
+          By numbering at least
+          %strong
+            6
+          of these boxes in the order of your choice (with number 1 as your first choice)
+
+    
+      - @parties.each do |party|
+        .abovesepdiv
+          .abovetag
+            %p{:class => "partyname"}= party.name_ab
+          - if party.name != 'Indepedent'
+            .logo
+              =image_tag asset_path('LOGO.png')
+          %select{:id => "party_#{party.id}", :name => "party[#{party.id}]", :class => "above"}
+            %option{:value => ''}None
+            - (@parties.size-1).times do |number|
+              %option{:value => number+1}= number+1
+
+    #break
+
+    #belowdiv
+      .instdiv
+        %p{:class => "black"}
+          Or
+        %p{:class => "big"}
+          Below the line
+        %p
+          By numbering at least
+          %strong
+            6
+          of these boxes in the order of your choice (with number 1 as your first choice).
+
+      - @parties.each do |party|
+        .belowsepdiv
+          %p{:class => "bpartyname"}= party.name_ab
+          - @candidates.each do |candidate|
+            -if candidate.party_id == party.id
+              .belowtag
+                .selects
+                  %select{:name => "candidate[#{candidate.id}]", :id => "candidate_#{candidate.id}"}
+                    %option{:value => ''}None
+                    - @candidates.size.times do |number|
+                      %option{:value => number+1}= number+1
+                .describe
+                  %p{:class => "desc"}
+                    = candidate.surname
+                  %p{:class => "desc"}
+                    = candidate.given_name
+                  %p{:class => "desc"}
+                    = party.name_ab
+    
+
+  = submit_tag "submit"
+
+
+
+= link_to 'Back', votes_path
