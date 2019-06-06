@@ -6,10 +6,15 @@ FactoryBot.define do
         p.sequence(:name_ab) { |n| "P #{n}"}
     end
 
+    factory :invalid_party, class: 'Party' do |p|
+        p.name { "" }
+        p.sequence(:name_ab) { |n| "P #{n}"}
+    end
+
     factory :party_with_candidates, parent: :party do
         #Create five candidates and associate them with this party
         after(:create) do |party|
-            create_list(:candidates, 5, party: party)
+            create_list(:candidate, 5, party: party)
         end
     end
 end
