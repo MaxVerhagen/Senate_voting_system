@@ -44,9 +44,9 @@
       %th{:scope => 'col'} Positon
       %th{:scope => 'col'} Edit
       %th{:scope => 'col'} Remove
-  %tbody
+  %tbody.sortable
     - @candidates.each do |candidate|
-      %tr
+      %tr{:id => candidate.sortable_id}
         %td{name: 'candidate-name'}= candidate.given_name
         %td{name: 'candidate-surname'}= candidate.surname
         %td{name: 'candidate-div'}= candidate.divison_name

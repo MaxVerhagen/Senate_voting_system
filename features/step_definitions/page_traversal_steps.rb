@@ -1,8 +1,9 @@
 #Go to any specific page for a given party
 When /^I goto the (.+) page of "([^"]*)"(?: party)?$/ do |page_type, party_name|
-    puts Party.find_by_name(party_name).id
     if page_type == "show"
         visit party_path(Party.find_by_name(party_name).id)
+    elsif page_type == "edit"
+        visit edit_party_path(Party.find_by_name(party_name).id)
     end
 end
 
@@ -30,7 +31,7 @@ Then /^I will be on the (.+) page of "([^"]*)"(?: party)?$/ do |page_type, party
     elsif page_type == "edit"
         expect(current_path).to eq edit_party_path(party)
     else page_type == "show"
-        expect(current_path).to eq(party_path(party))
+        expect(current_path).to eq party_path(party)
     end
 end
 
