@@ -16,8 +16,8 @@ class VotesController < ApplicationController
   def new
     @state = params[:state]
 
-    @parties = Party.order(:order).where(:state => @state)
-    @candidates = Candidate.order(:order).where(:state => @state)
+    @parties = Party.order(:sequence).where(:state => @state)
+    @candidates = Candidate.order(:party_pos).where(:state => @state)
   end
 
   # GET /votes/1/edit
