@@ -29,6 +29,8 @@ Then /^I will be on the (.+) page of "([^"]*)"(?: party)?$/ do |page_type, party
         expect(current_path).to eq new_party_candidate_path(party)
     elsif page_type == "edit"
         expect(current_path).to eq edit_party_path(party)
+    else page_type == "show"
+        expect(current_path).to eq(party_path(party))
     end
 end
 
