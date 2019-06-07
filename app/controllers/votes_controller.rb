@@ -18,6 +18,9 @@ class VotesController < ApplicationController
 
     @parties = Party.order(:sequence).where(:state => @state)
     @candidates = Candidate.order(:party_pos).where(:state => @state)
+
+    @party_options = [""] + (1..Party.count).to_a
+    @candidate_options = [""] + (1..Candidate.count).to_a
   end
 
   # GET /votes/1/edit
@@ -27,27 +30,27 @@ class VotesController < ApplicationController
   # POST /votes
   # POST /votes.json
   def create
-    partypref = params[:party] || session[:party]
-    candidatepref = params[:candidate] || session[:candidate]
+    state = params[:state]
+    party_preference = view_context.PreferenceCleanUp params[:party].values, 1
+    candidate_preference = view_context.PreferenceCleanUp params[:candidate].values, 6
 
-    pref = ''
+    # logger.debug(party_preference)
+    # logger.debug(candidate_preference)
+    # logger.debug(party_preference.join(','))
+    # logger.debug(candidate_preference.join(','))
 
-    partypref.each do |ppref|
-      pref = pref + ppref[1].to_s + ","
+    preference = party_preference.join(',') + ',' + candidate_preference.join(',')
+    vote = Vote.new(state: state, preference: preference)
+
+    # puts preference
+
+    respond_to do |format|
+      if vote.save
+        format.html { redirect_to votes_path, notice: 'Your vote was successfully saved.' }
+      else
+        format.html { redirect_to new_vote_path(state: state), flash: { error: vote.errors[:preference].join(', ') } }
+      end
     end
-
-    candidatepref.each do |cpref|
-      pref = pref + cpref[1].to_s + ","
-    end
-
-
-    pref = pref.first(-1)
-
-
-    @vote = Vote.create!(:state => @state, :preference => pref)
-    flash[:notice] = "Vote was successfully saved."
-
-    redirect_to votes_path
   end
 
   # PATCH/PUT /votes/1

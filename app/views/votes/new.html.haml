@@ -1,50 +1,13 @@
-%h1 Voting Page for #{@state}
+-if flash.key?(:error)
+  %div{class: "alert alert-danger", role: "alert"}
+    %b= "Your vote was unsuccessful:"
+    %button{class: "close", "data-dismiss" => "alert", "aria-label" => "Close"}
+      %span{"aria-hidden" => "true"}
+        &times;
+    %ul
+      -flash[:error].split(', ').each do |message|
+        %li= message
 
-= form_tag votes_path(:state => @state) do
-  %div{class:" text-center border-top border-dark"}
-    %div{class:"media col-2 "}
-      %p{class:"mr-3"}How_2_vote
-      %div{class:"media-body"}
-      - @parties.each do |party|
-        
-        %span{class:"border border-dark col-7"}
-          %br
-          - if party.name
-            .logo
-              =image_tag asset_path('LOGO.png')
-          %br
-          %select{:id => "party_#{party.id}", :name => "party[#{party.id}]", :class => "form-control"}
-            %option{:value => ''}None
-            - (@parties.size-1).times do |number|
-              %option{:value => number+1}= number+1        
-          %br
-          %br
-          %button{class:"btn btn-light font-weight-bold", "data-toggle"=>"tooltip", title:"#{party.name}", "data-placement"=>"top", "disabled"=>"true"}#{party.name_ab}
-          %br
-          %br
-    %p{class:"p-2 mb-0 text-white bg-dark row"} 
-    %div{class:"media col-2 "}
-      %p{class:"mr-3 "}How_2_vote
-      %div{class:"media-body "}
-      - @parties.each do |party|
-        %span{class:"border border-dark col-7 border-bottom-0 "}
-          %br
-          %button{class:"btn btn-light font-weight-bold", "data-toggle"=>"tooltip", title:"#{party.name}", "data-placement"=>"top", "disabled"=>"true"}#{party.name_ab}
-          %br
-          - @candidates.each do |candidate|
-            - if candidate.party_id == party.id
-              %br
-              %div{class:"row border-bottom border-dark"}
-                %select{:name => "candidate[#{candidate.id}]", :id => "candidate_#{candidate.id}",class:"col-5 ml-1 form-control"}
-                  %option{:value => ''}None
-                  - @candidates.size.times do |number|
-                    %option{:value => number+1}= number+1 
-                %div{class:"col-2 ml-1"}   
-                  %p{class:"row"} #{candidate.surname}
-                  %p{class:"row"} #{candidate.given_name}
-              / - else
-              /%br
-        
-              
-  = submit_tag 'Submit', :class => 'btn btn-warning col-2' , data: { confirm: 'Are you sure?' }
-  = link_to 'Back', "/", :class => 'btn btn-secondary col-2'
+%h1.display-4 Voting Page for #{@state}
+
+= render 'new_form'

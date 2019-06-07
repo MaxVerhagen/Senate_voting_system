@@ -1,7 +1,71 @@
 // Place all the styles related to the Votes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-@import "bootstrap";
+
+// @media (min-width: 576px) {
+// 	.sidebar {
+// 		 max-width: 280px;
+// 	}
+// }
+
+// @media (min-width: 1000px) {
+// 	.container-scroll {
+// 		overflow-x: auto;
+// 	}
+// 	.container-scroll > .row {
+// 		width: 150%; /* = 100% * 4/3 */
+// 	}
+// }
+
+.scrolling-wrapper {
+	overflow-x: scroll;
+	overflow-y: hidden;
+	white-space: nowrap;
+  
+	.card {
+		display: inline-block;
+		width: 300px;
+		height: 700px;
+		padding-block: 20px;
+		white-space: normal;
+		vertical-align: top;
+		border-style: solid;
+		border-color: #333;
+		border-width: 1px;
+	}
+
+	.name {
+		margin-left: 20px;
+	}
+
+	hr {
+		border: none;
+		height: 10px;
+		/* Set the hr color */
+		color: #333; /* old IE */
+		background-color: #333; /* Modern Browsers */
+	}
+}
+
+// @media (min-width: 992px) {
+// 	.container-scroll > .row {
+// 	  overflow-x: auto;
+// 	  white-space: nowrap;
+// 	}
+// 	.container-scroll > .row > .col-md-3 {
+// 	  display: inline-block;
+// 	  float: none;
+// 	}
+// }
+
+// .container-scroll > .row {
+// 	margin-top: 24px;
+// }
+// .container-scroll > .row > .col-md-3 {
+// 	font-weight: bold;
+// 	text-align: center;
+// }
+
 /*
 
 p {

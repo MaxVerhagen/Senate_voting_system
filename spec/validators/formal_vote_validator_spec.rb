@@ -62,7 +62,7 @@ RSpec.describe FormalVoteValidator do
         it "should count vote as informal if there is no box marked with number one above the line and no boxes have been marked below the line" do
             vote.preference = ",,5,6,4,3,,,,,,,,,,,,,,,,,,,"
             expect(vote.valid?).to be_falsey
-            expect(vote.errors[:preference]).to include("You are voting above the line, you need to number at least six boxes from 1 to 6.")
+            expect(vote.errors[:preference]).to include("You are voting above the line and need to number at least six boxes from 1 to 6.")
         end
 
         it "should count vote as informal if there are two boxes marked one above the line" do
@@ -74,7 +74,7 @@ RSpec.describe FormalVoteValidator do
         it "should count vote as informal if there are no boxes marked from one to six below the line" do
             vote.preference = ",,,,,,,,,,,,2,3,,6,5,,,,,,,,"
             expect(vote.valid?).to be_falsey
-            expect(vote.errors[:preference]).to include("You are voting below the line, you need to number at least twelve boxes from 1 to 12.")
+            expect(vote.errors[:preference]).to include("You are voting below the line and need to number at least twelve boxes from 1 to 12.")
         end
 
         it "should count vote as informal if there are repeated numbers marked between one and six below the line" do

@@ -1,0 +1,44 @@
+= form_tag votes_path(:state => @state) do
+  %div.scrolling-wrapper
+    - @parties.each do |party|
+      %div.card
+        %center
+          =image_tag asset_path('LOGO.png')
+        %br
+        %div{class: "text-center font-weight-bold"}
+          = party.name
+        %br
+        %div.form-row
+          %div.col-md-4
+          %div.col-md-4
+            = select_tag "party[#{party.id}]", options_for_select(@party_options), :class => "form-control"
+          %div.col-md-4
+    
+        %br
+        %br
+        %br
+
+        %hr
+
+        %div.name
+          %b
+            = party.name
+          %br
+          %br
+          - party.candidates.each do |candidate|
+            %div.form-row
+              %div.col-md-4
+                = select_tag "candidate[#{candidate.id}]", options_for_select(@candidate_options), :class => "form-control"
+              %div.col-md-4
+                %label
+                  %b
+                    =candidate.surname
+                  =candidate.given_name
+        
+  %div{class: "actions w-100 p-3 form-row"}
+    %div.col-1
+    %div{class: "col-10 text-center"}
+
+      = submit_tag 'Submit', :class => 'btn btn-warning col-2' , data: { confirm: 'Are you sure?' }
+      = link_to 'Back', "/", :class => 'btn btn-secondary col-2'
+    %div.col-1
