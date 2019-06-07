@@ -106,3 +106,5 @@ guard "cucumber", cucumber_options do
     Dir[File.join("**/#{m[1]}.feature")][0] || "features"
   end
 end
+
+clearing :on

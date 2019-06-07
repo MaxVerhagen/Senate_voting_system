@@ -81,6 +81,9 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'rails-controller-testing'
 
+  # Allows to build test ActiveRecord models for each test
+  gem 'with_model'
+
   # Code coverage for Ruby
   gem 'simplecov', require: false
 end
