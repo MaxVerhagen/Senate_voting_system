@@ -24,7 +24,7 @@ Then /^I will be on the (.+) page of "([^"]*)"(?: party)?$/ do |page_type, party
 end
 
 Then /^I will be on the thank you page$/ do
-    expect(page).to have_current_path(vote_thank_you_path())
+    expect(page).to have_current_path(thank_you_vote_path())
 end
 
 Then /^I will be on voting page of "([^"]*)"$/ do |state|
