@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   resources :votes
+  get 'vote/thankyou' => 'votes#thank_you', as: :vote_thank_you
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: "application#index"
+  
   scope '/vote' do
     root to: "application#vote"
   end 

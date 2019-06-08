@@ -2,6 +2,8 @@
 When /^I goto the (.+) page of "([^"]*)"(?: party)?$/ do |page_type, party_name|
     if page_type == "show"
         visit party_path(Party.find_by_name(party_name).id)
+    elsif page_type == "voting"
+        visit new_vote_path(state: party_name)
     end
 end
 
@@ -17,6 +19,14 @@ Then /^I will be on the (.+) page of "([^"]*)"(?: party)?$/ do |page_type, party
     party = Party.find_by(name: party_name)
 
     if page_type == "new candidate"
-        expect(current_path).to eq new_party_candidate_path(party)
+        expect(page).to have_current_path(new_party_candidate_path(party))
     end
+end
+
+Then /^I will be on the thank you page$/ do
+    expect(page).to have_current_path(vote_thank_you_path())
+end
+
+Then /^I will be on voting page of "([^"]*)"$/ do |state|
+    expect(page).to have_current_path(new_vote_path(state: state))
 end

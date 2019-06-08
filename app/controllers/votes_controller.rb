@@ -23,6 +23,10 @@ class VotesController < ApplicationController
     @candidate_options = [""] + (1..Candidate.count).to_a
   end
 
+  def thank_you
+
+  end
+
   # GET /votes/1/edit
   def edit
   end
@@ -46,7 +50,7 @@ class VotesController < ApplicationController
 
     respond_to do |format|
       if vote.save
-        format.html { redirect_to votes_path, notice: 'Your vote was successfully saved.' }
+        format.html { redirect_to vote_thank_you_path(), notice: 'Your vote was successfully saved.' }
       else
         format.html { redirect_to new_vote_path(state: state), flash: { error: vote.errors[:preference].join(', ') } }
       end

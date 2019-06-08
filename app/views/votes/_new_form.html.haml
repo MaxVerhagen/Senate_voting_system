@@ -5,7 +5,7 @@
         %center
           =image_tag asset_path('LOGO.png')
         %br
-        %div{class: "text-center font-weight-bold"}
+        %div{class: "text-center font-weight-bold", name: "party-name"}
           = party.name
         %br
         %div.form-row
@@ -29,7 +29,7 @@
             %div.form-row
               %div.col-md-4
                 = select_tag "candidate[#{candidate.id}]", options_for_select(@candidate_options), :class => "form-control"
-              %div.col-md-4
+              %div{class: "col-md-4", name: "candidate-name"}
                 %label
                   %b
                     =candidate.surname
