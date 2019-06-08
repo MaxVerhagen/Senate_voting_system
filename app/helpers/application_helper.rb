@@ -16,16 +16,16 @@ module ApplicationHelper
 
             stripped_candidate_preference = candidate_preference.reject(&:blank?).map(&:to_i)
 
-            logger.debug("Prefrence is: #{preference}")
-            logger.debug("Party preference is: #{party_preference}")
-            logger.debug("Candidate preference is: #{candidate_preference}")
+            # logger.debug("Prefrence is: #{preference}")
+            # logger.debug("Party preference is: #{party_preference}")
+            # logger.debug("Candidate preference is: #{candidate_preference}")
 
             if !stripped_candidate_preference.empty?
                 index_of_first_pref = candidate_preference.index('1') + 1
-                logger.debug("Index of first pref: #{index_of_first_pref}")
+                # logger.debug("Index of first pref: #{index_of_first_pref}")
                 current_first_pref_num = first_preference_array[index_of_first_pref]
                 index_of_second_pref = candidate_preference.index('2') + 1
-                logger.debug("Index of second pref: #{index_of_second_pref}")
+                # logger.debug("Index of second pref: #{index_of_second_pref}")
                 current_second_pref_num = second_preference_array[index_of_first_pref][index_of_second_pref]
 
                 # puts first_preference_array[index_of_first_pref]

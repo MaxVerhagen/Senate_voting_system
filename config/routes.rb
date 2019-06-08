@@ -19,5 +19,6 @@ Rails.application.routes.draw do
   get '/admin', to: redirect('/admin/parties')
   get '/vote', to: redirect('/vote/help')
   get '/admin/vote_count', to: 'application#vote_count'
+  post '/admin/vote_count', to: 'application#vote_count'
   
 end

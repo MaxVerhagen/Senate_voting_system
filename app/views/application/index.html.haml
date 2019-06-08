@@ -3,7 +3,7 @@
   %div{class:"dropdown-menu"}
     %button{class:"dropdown-item", "aria-label" => "login", "data-toggle"=>"modal", "data-target"=>"#login"}Control Panel
     /= link_to 'Control Panel',  parties_path, :class => 'dropdown-item'
-    = link_to 'View Votes', "/vote", :class => 'dropdown-item'
+    = link_to 'View Votes', admin_vote_count_path(state: "SA"), :class => 'dropdown-item'
     = link_to 'Test Vote', "/vote", :class => 'dropdown-item'
 
 %div{class: "text-center"}
