@@ -12,7 +12,7 @@ class VotesController < ApplicationController
   def new
     @state = params[:state]
 
-    @parties = Party.order(:sequence).where(:state => @state)
+    @parties = Party.order(:position).where(:state => @state)
     @candidates = Candidate.order(:party_pos).where(:state => @state)
 
     @party_options = [""] + (1..Party.count).to_a
