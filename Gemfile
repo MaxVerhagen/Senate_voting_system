@@ -111,6 +111,9 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'rails_sortable'
 
+# To display beautiful charts
+gem "chartkick"
+
 # Allows for safe use of and and
 gem 'andand'
 
