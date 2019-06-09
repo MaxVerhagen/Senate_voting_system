@@ -28,6 +28,10 @@ class ApplicationController < ActionController::Base
                 transfer_value = view_context.CalculateTransferingValue @quota, item[1]
                 candidate_out.push item[0]
 
+                if candidate_out.count >= 6
+                    break
+                end
+
                 logger.debug("Transfering surplus votes from candidate: #{item[0]}")
                 logger.debug("Transfer value is: #{transfer_value}")
 

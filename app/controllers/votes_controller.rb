@@ -30,6 +30,8 @@ class VotesController < ApplicationController
     party_preference = view_context.PreferenceCleanUp params[:party].values, 1
     candidate_preference = view_context.PreferenceCleanUp params[:candidate].values, 6
 
+    # puts "Candidate Prefe Controlelr is: #{candidate_preference}"
+
     # logger.debug(party_preference)
     # logger.debug(candidate_preference)
     # logger.debug(party_preference.join(','))

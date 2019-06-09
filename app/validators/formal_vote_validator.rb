@@ -2,9 +2,24 @@
 
 class FormalVoteValidator < ActiveModel::EachValidator
     def validate_each(record, attribute, value)
-        preference = value.split(',', options[:num_of_values])
-        party_preference = preference[0..options[:num_of_parties]-1]
-        candidate_preference = preference[options[:num_of_parties]..preference.length-1]
+        # puts "Value is : #{value}"
+
+        if value.length < 87
+            num_of_parties = 8
+            num_of_values = 21
+        else
+            num_of_parties = options[:num_of_parties]
+            num_of_values = options[:num_of_values]
+        end
+
+
+        preference = value.split(',', num_of_values)
+        party_preference = preference[0..num_of_parties-1]
+        candidate_preference = preference[num_of_parties..preference.length-1]
+
+        # puts "Pref is: #{preference}"
+        # puts "Party pref: #{party_preference}"
+        # puts "Candidate pref: #{candidate_preference}"
 
         stripped_party_preference = party_preference.reject(&:blank?).map(&:to_i)
         stripped_candidate_preference = candidate_preference.reject(&:blank?).map(&:to_i)
