@@ -16,7 +16,7 @@
       %th{:scope => 'col'} Divison
       %th{:scope => 'col'} State
       %th{:scope => 'col'} Positon
-  %tbody.sortable
+  %tbody
     - @candidates.each do |candidate|
       %tr
         %td{name: 'candidate-name'}= candidate.given_name  

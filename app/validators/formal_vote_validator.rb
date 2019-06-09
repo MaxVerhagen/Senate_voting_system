@@ -4,7 +4,10 @@ class FormalVoteValidator < ActiveModel::EachValidator
     def validate_each(record, attribute, value)
         # puts "Value is : #{value}"
 
-        if value.length < 87
+        if options[:num_of_values] == 25
+            num_of_parties = options[:num_of_parties]
+            num_of_values = options[:num_of_values]
+        elsif value.length < 87
             num_of_parties = 8
             num_of_values = 21
         else

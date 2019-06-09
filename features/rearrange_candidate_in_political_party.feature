@@ -15,7 +15,7 @@ Feature: Rearrange candidates in political party
         | Patrick    | Donlad  | Hindmarsh    | SA    | 3         | 1        |
     
     Scenario: View a list of candidates by their original order
-        When I goto the show page of "The Greens" party
+        When I goto the edit page of "The Greens" party
         Then I should see a list of these candidates:
         | given_name | surname |
         | Sophie     | Guy     |
@@ -25,7 +25,7 @@ Feature: Rearrange candidates in political party
 
     @javascript
     Scenario: Rearrange candidates from displayed list by drag and drop
-        When I goto the show page of "The Greens" party
+        When I goto the edit page of "The Greens" party
         And I drag "Patrick" "Donlad" to position 1
         Then I should see a list of these candidates:
         | given_name | surname |
@@ -36,9 +36,9 @@ Feature: Rearrange candidates in political party
 
     @javascript
     Scenario: Rearranged positions should persist on page reload
-        When I goto the show page of "The Greens" party
+        When I goto the edit page of "The Greens" party
         And I drag "Jane" "Bange" to position 2
-        And I goto the show page of "The Greens" party
+        And I goto the edit page of "The Greens" party
         Then I should see a list of these candidates:
         | given_name | surname |
         | Sophie     | Guy     |
@@ -48,9 +48,9 @@ Feature: Rearrange candidates in political party
     
     @javascript
     Scenario: Rearranged candidates should have updated position displayed
-        When I goto the show page of "The Greens" party
+        When I goto the edit page of "The Greens" party
         And I drag "Mark" "Keough" to position 1
-        When I goto the show page of "The Greens" party
+        When I goto the edit page of "The Greens" party
         Then I should see a list of these candidates with position:
         | given_name | surname | party_pos |
         | Mark       | Keough  | 1         |
