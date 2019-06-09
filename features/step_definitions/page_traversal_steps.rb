@@ -25,6 +25,10 @@ When /^Choosing candidate "([^"]*)" "([^"]*)" I follow "([^"]*)" link$/ do |cand
     end
 end
 
+When /^I goto vote count page with quota (.+)$/ do |quota|
+    visit admin_vote_count_path(state: "SA")
+end
+
 Then /^I will be on the (.+) page of "([^"]*)"(?: party)?$/ do |page_type, party_name|
     party = Party.find_by(name: party_name)
 
