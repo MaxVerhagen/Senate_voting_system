@@ -4,6 +4,7 @@ require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'spec_helper'
+require 'with_model'
 require 'rspec/rails'
 require 'support/factory_bot'
 # Add additional requires below this line. Rails is not loaded until this point!
@@ -33,6 +34,9 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 RSpec.configure do |config|
+  # For with_model gem
+  config.extend WithModel
+  DatabaseCleaner.clean_with(:truncation)
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.

@@ -1,76 +1,53 @@
 class VotesController < ApplicationController
   before_action :set_vote, only: [:show, :edit, :update, :destroy]
 
-  # GET /votes
-  # GET /votes.json
-  def index
+  # GET /vote
+  # GET /vote.json
+  # GET /vote/help
+  def help
     @votes = Vote.all
-  end
-
-  # GET /votes/1
-  # GET /votes/1.json
-  def show
   end
 
   # GET /votes/new
   def new
     @state = params[:state]
 
-    @parties = Party.order(:sequence).where(:state => @state)
+    @parties = Party.order(:position).where(:state => @state)
     @candidates = Candidate.order(:party_pos).where(:state => @state)
+
+    @party_options = [""] + (1..Party.count).to_a
+    @candidate_options = [""] + (1..Candidate.count).to_a
   end
 
-  # GET /votes/1/edit
-  def edit
+  def thank_you
+
   end
 
   # POST /votes
   # POST /votes.json
   def create
-    partypref = params[:party] || session[:party]
-    candidatepref = params[:candidate] || session[:candidate]
+    state = params[:state]
+    party_preference = view_context.PreferenceCleanUp params[:party].values, 1
+    candidate_preference = view_context.PreferenceCleanUp params[:candidate].values, 6
 
-    pref = ''
+    # puts "Candidate Prefe Controlelr is: #{candidate_preference}"
 
-    partypref.each do |ppref|
-      pref = pref + ppref[1].to_s + ","
-    end
+    # logger.debug(party_preference)
+    # logger.debug(candidate_preference)
+    # logger.debug(party_preference.join(','))
+    # logger.debug(candidate_preference.join(','))
 
-    candidatepref.each do |cpref|
-      pref = pref + cpref[1].to_s + ","
-    end
+    preference = party_preference.join(',') + ',' + candidate_preference.join(',')
+    vote = Vote.new(state: state, preference: preference)
 
+    # puts preference
 
-    pref = pref.first(-1)
-
-
-    @vote = Vote.create!(:state => @state, :preference => pref)
-    flash[:notice] = "Vote was successfully saved."
-
-    redirect_to votes_path
-  end
-
-  # PATCH/PUT /votes/1
-  # PATCH/PUT /votes/1.json
-  def update
     respond_to do |format|
-      if @vote.update(vote_params)
-        format.html { redirect_to @vote, notice: 'Vote was successfully updated.' }
-        format.json { render :show, status: :ok, location: @vote }
+      if vote.save
+        format.html { redirect_to thank_you_vote_path(), notice: 'Your vote was successfully saved.' }
       else
-        format.html { render :edit }
-        format.json { render json: @vote.errors, status: :unprocessable_entity }
+        format.html { redirect_to new_vote_path(state: state), flash: { error: vote.errors[:preference].join(', ') } }
       end
-    end
-  end
-
-  # DELETE /votes/1
-  # DELETE /votes/1.json
-  def destroy
-    @vote.destroy
-    respond_to do |format|
-      format.html { redirect_to votes_url, notice: 'Vote was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 

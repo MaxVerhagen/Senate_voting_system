@@ -2,6 +2,8 @@
 When /^I goto the (.+) page of "([^"]*)"(?: party)?$/ do |page_type, party_name|
     if page_type == "show"
         visit party_path(Party.find_by_name(party_name).id)
+    elsif page_type == "voting"
+        visit new_vote_path(state: party_name)
     elsif page_type == "edit"
         visit edit_party_path(Party.find_by_name(party_name).id)
     end
@@ -23,16 +25,28 @@ When /^Choosing candidate "([^"]*)" "([^"]*)" I follow "([^"]*)" link$/ do |cand
     end
 end
 
+When /^I goto vote count page with quota (.+)$/ do |quota|
+    visit admin_vote_count_path(state: "SA")
+end
+
 Then /^I will be on the (.+) page of "([^"]*)"(?: party)?$/ do |page_type, party_name|
     party = Party.find_by(name: party_name)
 
     if page_type == "new candidate"
-        expect(current_path).to eq new_party_candidate_path(party)
+        expect(page).to have_current_path(new_party_candidate_path(party))
     elsif page_type == "edit"
-        expect(current_path).to eq edit_party_path(party)
+        expect(page).to have_current_path(edit_party_path(party))
     else page_type == "show"
-        expect(current_path).to eq party_path(party)
+        expect(page).to have_current_path(party_path(party))
     end
+end
+
+Then /^I will be on the thank you page$/ do
+    expect(page).to have_current_path(thank_you_vote_path())
+end
+
+Then /^I will be on voting page of "([^"]*)"$/ do |state|
+    expect(page).to have_current_path(new_vote_path(state: state))
 end
 
 Then /^I will be on the edit page of "([^"]*)" "([^"]*)" candidate of "([^"]*)"(?: party)?$/ do |candidate_given_name, candidate_surname, party_name|
