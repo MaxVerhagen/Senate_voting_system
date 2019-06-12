@@ -1,0 +1,206 @@
+// Place all the styles related to the Votes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+// @media (min-width: 576px) {
+// 	.sidebar {
+// 		 max-width: 280px;
+// 	}
+// }
+
+// @media (min-width: 1000px) {
+// 	.container-scroll {
+// 		overflow-x: auto;
+// 	}
+// 	.container-scroll > .row {
+// 		width: 150%; /* = 100% * 4/3 */
+// 	}
+// }
+
+.scrolling-wrapper {
+	overflow-x: scroll;
+	overflow-y: hidden;
+	white-space: nowrap;
+  
+	.card {
+		display: inline-block;
+		width: 300px;
+		height: 700px;
+		padding-block: 20px;
+		white-space: normal;
+		vertical-align: top;
+		border-style: solid;
+		border-color: #333;
+		border-width: 1px;
+	}
+
+	.name {
+		margin-left: 20px;
+	}
+
+	hr {
+		border: none;
+		height: 10px;
+		/* Set the hr color */
+		color: #333; /* old IE */
+		background-color: #333; /* Modern Browsers */
+	}
+}
+
+// @media (min-width: 992px) {
+// 	.container-scroll > .row {
+// 	  overflow-x: auto;
+// 	  white-space: nowrap;
+// 	}
+// 	.container-scroll > .row > .col-md-3 {
+// 	  display: inline-block;
+// 	  float: none;
+// 	}
+// }
+
+// .container-scroll > .row {
+// 	margin-top: 24px;
+// }
+// .container-scroll > .row > .col-md-3 {
+// 	font-weight: bold;
+// 	text-align: center;
+// }
+
+/*
+
+p {
+	margin: 5px !important;
+	padding:0px !important;
+}
+
+
+p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+p.big{
+	font-size:20px;
+	font-weight:bold;
+}
+
+p.black{
+	background: #000000;
+	font-weight:bold;
+	font-size: 20px;
+	color: #ffffff;
+}
+
+
+p.partyname{
+	bottom:0;
+	font-size:25px;
+}
+
+p.bpartyname{
+	font-size:25px;
+	font-weight:bold;
+}
+
+p.desc{
+	margin:0px;
+	line-height:10px;
+	padding-left:5px;
+	padding-top:3px;
+}
+
+div#votediv{
+	height:720px;
+	width:2300px;
+	border: solid 1px #000000;
+}
+
+div#votetitlediv{
+	width:1300px;
+}
+
+div#abovediv{
+	margin-top: 10px;
+	height: 250px;
+	
+}
+
+div#break{
+	width:2300px;
+	height: 15px;
+	background: #000000;
+}
+
+div#belowdiv{
+
+	
+}
+
+div.instdiv{
+	float:left;
+	width:160px;
+}
+
+div.abovesepdiv{
+	position:relative;
+	height: 250px;
+	float:left;
+	width:140px;
+	border-left: solid 1px #000000;
+}
+
+div.belowsepdiv{
+	height: 350px;
+	float:left;
+	width:140px;
+	border-left: solid 1px #000000;
+}
+
+
+div.abovetag{
+	height:40;
+	position:absolute;
+	bottom:0;
+	margin-bottom:10px;
+	float:left;
+}
+
+div.belowtag{
+	width:140px;
+	height:40px;
+	float:left;
+	top:0;
+	margin-top:10px;
+}
+
+div.selects{
+	width:40px;
+	height:40px;
+	float:left;
+}
+div.describe{
+	width:100px;
+	height:40px;
+	float:left;
+	
+}
+
+div.logo{
+	position:absolute;
+	bottom: 100px;
+	left:40px;
+	
+}
+
+select{
+	width:40px;
+	height:40px;
+	left:40px;
+}
+
+select.above{
+	position:absolute;
+	bottom: 50px;
+}
+*/

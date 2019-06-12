@@ -1,0 +1,13 @@
+-if flash.key?(:error)
+  %div{class: "alert alert-danger", role: "alert"}
+    %b= "Your vote was unsuccessful:"
+    %button{class: "close", "data-dismiss" => "alert", "aria-label" => "Close"}
+      %span{"aria-hidden" => "true"}
+        &times;
+    %ul
+      -flash[:error].split(', ').each do |message|
+        %li= message
+
+%h1.display-4 Voting Page for #{@state}
+
+= render 'new_form'

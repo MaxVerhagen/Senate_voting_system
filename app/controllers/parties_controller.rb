@@ -1,7 +1,6 @@
 class PartiesController < ApplicationController
   before_action :set_party, only: [:show, :edit, :update, :destroy]
-  
-  
+
   # GET /parties
   # GET /parties.json
   def index
@@ -13,7 +12,6 @@ class PartiesController < ApplicationController
   # GET /parties/1
   # GET /parties/1.json
   def show
-    @party = Party.find params[:id]
     @candidates = @party.all_candidates_in_order
   end
 
@@ -24,6 +22,7 @@ class PartiesController < ApplicationController
 
   # GET /parties/1/edit
   def edit
+    @candidates = @party.all_candidates_in_order
   end
 
   # POST /parties
@@ -45,15 +44,13 @@ class PartiesController < ApplicationController
   # PATCH/PUT /parties/1
   # PATCH/PUT /parties/1.json
   def update
-    respond_to do |format|
-      if @party.update(party_params)
-        format.html { redirect_to @party, notice: 'Party was successfully updated.' }
-        format.json { render :show, status: :ok, location: @party }
-      else
-        format.html { render :edit }
-        format.json { render json: @party.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @party.update(party_params)
+          format.html { redirect_to @party, notice: 'Party was successfully updated.' }
+        else
+          format.html { redirect_to edit_party_path(@party), flash: { error: @party.errors.full_messages.join(', ') } }
+        end
       end
-    end
   end
 
   # DELETE /parties/1
@@ -62,7 +59,6 @@ class PartiesController < ApplicationController
     @party.destroy
     respond_to do |format|
       format.html { redirect_to parties_url, notice: 'Party was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
@@ -72,8 +68,8 @@ class PartiesController < ApplicationController
       @party = Party.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    # Never trust parameters from the scary internet, only allow the white list through.  
     def party_params
-      params.require(:party).permit(:name, :name_ab)
+      params.require(:party).permit(:name, :name_ab, :created_at, :updated_at)
     end
 end

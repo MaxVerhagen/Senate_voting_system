@@ -1,4 +1,9 @@
-%p#notice= notice
+-if flash.key?(:notice)
+  %div{class: "alert alert-success", role: "alert"}
+    = notice
+    %button{class: "close", "data-dismiss" => "alert", "aria-label" => "Close"}
+      %span{"aria-hidden" => "true"}
+        &times;
 
 %h2.display-4= @party.name
 %br
@@ -16,9 +21,9 @@
       %tr
         %td{name: 'candidate-name'}= candidate.given_name  
         %td{name: 'candidate-surname'}= candidate.surname
-        %td= candidate.divison_name
-        %td= candidate.state
-        %td= candidate.party_pos
+        %td{name: 'candidate-div'}= candidate.divison_name
+        %td{name: 'candidate-state'}= candidate.state
+        %td{name: 'candidate-sort-pos'}= candidate.party_pos + 1
 
 = link_to 'Edit Info', edit_party_path(@party), :class => 'btn btn-primary'
 = link_to 'Add Candidate', new_party_candidate_path(@party), :class => 'btn btn-success'

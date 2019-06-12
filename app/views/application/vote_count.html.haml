@@ -1,0 +1,42 @@
+%h1.display-4.text-center Vote Count
+%br
+%br
+
+%div.card
+    %div.card-header
+        %strong.h3 Elected Candidates:
+    %div.card-body
+        %div.row 
+            %div.col-8
+                %table{:class => 'table table-hover', :id => 'candidates'}
+                    %thead.thead-dark
+                        %tr
+                            %th{:scope => 'col'} Name
+                            %th{:scope => 'col'} Surname
+                            %th{:scope => 'col'} Party
+                            %th{:scope => 'col'} Votes
+                    %tbody
+                        - @elected_candidates.each do |candidate|
+                            %tr
+                                %td{name: 'candidate-name'}= candidate["given_name"]  
+                                %td{name: 'candidate-surname'}= candidate["surname"]
+                                %td{name: 'candidate-party'}= Party.find(candidate["party_id"]).name
+                                %td{name: 'candidate-vote-count'}= @results["#{candidate["given_name"]} #{candidate["surname"]}"]
+            %div.col-4
+                = form_for admin_vote_count_path do |f|
+                    = hidden_field_tag :recount, "true"
+                    = hidden_field_tag :state, "SA"
+                    %div.form-row
+                        %div.form-group.col-md-12
+                            = f.label "Custom Quota:", class: "h4"
+                            = f.text_field "quota", class: "form-control form-control-lg"
+                    %div.text-center
+                        = f.submit 'Recalculate', :class => 'btn btn-success btn-lg col-3'
+                        = link_to 'Back',  "/", :class => 'btn btn-primary btn-lg col-3'
+                
+                %div.h3
+                    Current Quota:
+                    = @quota
+
+
+= column_chart @results, height: "1000px", library: {plotOptions: {series: {pointWidth: 150}}}

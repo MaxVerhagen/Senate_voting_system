@@ -78,7 +78,7 @@ end
 #
 When /^(?:|I )fill in the following:$/ do |fields|
   fields.rows_hash.each do |name, value|
-    When %{I fill in "#{name}" with "#{value}"}
+    step %{I fill in "#{name}" with "#{value}"}
   end
 end
 
@@ -100,6 +100,14 @@ end
 
 When /^(?:|I )attach the file "([^"]*)" to "([^"]*)"$/ do |path, field|
   attach_file(field, File.expand_path(path))
+end
+
+When /^I confirm popup$/ do
+  page.driver.browser.switch_to.alert.accept    
+end
+
+When /^I dismiss popup$/ do
+  page.driver.browser.switch_to.alert.dismiss
 end
 
 Then /^(?:|I )should see "([^"]*)"$/ do |text|

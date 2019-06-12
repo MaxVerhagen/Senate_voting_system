@@ -1,0 +1,6 @@
+-if flash.key?(:notice)
+  %div{class: "alert alert-success", role: "alert"}
+    = notice
+    %button{class: "close", "data-dismiss" => "alert", "aria-label" => "Close"}
+      %span{"aria-hidden" => "true"}
+        &times;
