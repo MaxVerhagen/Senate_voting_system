@@ -4,7 +4,7 @@ class PartiesController < ApplicationController
   # GET /parties
   # GET /parties.json
   def index
-    @parties = Party.all
+    @parties = Party.order(:position)
   end
   
   
@@ -28,7 +28,7 @@ class PartiesController < ApplicationController
   # POST /parties
   # POST /parties.json
   def create
-    @party = Party.new(party_params)
+    @party = Party.new(party_params.merge({position: Party.count - 1, state: "SA"}))
 
     respond_to do |format|
       if @party.save

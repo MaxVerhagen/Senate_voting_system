@@ -1,6 +1,10 @@
 class Party < ApplicationRecord
+    include RailsSortable::Model
+    
     has_many :candidates, :dependent => :destroy
     validates :name, :name_ab, presence: true
+
+    set_sortable :position
 
     def all_candidates_in_order
         self.candidates.order(:party_pos).all

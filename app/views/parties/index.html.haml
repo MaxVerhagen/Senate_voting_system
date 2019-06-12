@@ -14,9 +14,9 @@
       %th View Party
       %th Edit Party
       %th Delete Party
-  %tbody
+  %tbody.sortable
     - @parties.each do |party|
-      %tr
+      %tr{:id => party.sortable_id}
         %td= party.name
         %td= link_to 'Show', party, :class => 'btn btn-info'
         %td= link_to 'Edit', edit_party_path(party), :class => 'btn btn-primary' 
