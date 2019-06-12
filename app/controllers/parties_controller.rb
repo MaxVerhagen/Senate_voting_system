@@ -1,13 +1,13 @@
 class PartiesController < ApplicationController
   before_action :set_party, only: [:show, :edit, :update, :destroy]
-  
-
 
   # GET /parties
   # GET /parties.json
   def index
     @parties = Party.all
   end
+  
+  
 
   # GET /parties/1
   # GET /parties/1.json
@@ -68,8 +68,8 @@ class PartiesController < ApplicationController
       @party = Party.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-  def party_params
-    params.require(:party).permit(:name, :name_ab, :created_at, :updated_at)
-  end
+    # Never trust parameters from the scary internet, only allow the white list through.  
+    def party_params
+      params.require(:party).permit(:name, :name_ab, :created_at, :updated_at)
+    end
 end
