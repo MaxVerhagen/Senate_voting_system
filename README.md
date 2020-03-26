@@ -3,8 +3,6 @@
 Project information document located at:
 https://docs.google.com/document/d/1AoTW80NJLNJkmhKpdA6_M_GBWnajl682vY01hqYw1TY
 
-Project link:
-https://group09-18-s1-esas.herokuapp.com/
 
 ## Use Cases
 
